@@ -24,7 +24,7 @@ Use the Table of Contents to practice and test your knowledge. It doesn't show t
     - What is MVVM?
 - [General / Uncategorized](https://github.com/onthecodepath/iOS-Interview-Questions#general--uncategorized)
     - What considerations do you need when writing a UITableViewController which shows images downloaded from a remote server?
-    - What is a protocol? How do you define your own protocol? 
+    - What is a protocol? How do you define your own protocol?
     - What is waterfall methodology and Agile methodology? What are the differences between them?
     - What is the difference between a class and an object?
     - What is JSON? What are the pros and cons?
@@ -82,7 +82,7 @@ Core Data is a framework that is used to manage model layer objects. It has the 
 
 #### When would you use Core Data over NSUserDefault?
 
-NSUserDefault is typically used to store small bits of data (settings, preferences, etc.). Core Data is used to store a large list of elements. 
+NSUserDefault is typically used to store small bits of data (settings, preferences, etc.). Core Data is used to store a large list of elements.
 
 #### What is a managed object context?
 
@@ -106,26 +106,26 @@ NSFetchRequest is the class responsible for fetching from Core Data. Fetch reque
 
 The Singleton design pattern ensures that only one instance exists for a given class and that there’s a global access point to that instance. It usually uses lazy loading to create the single instance when it’s needed the first time. ([source](https://medium.com/ios-os-x-development/ios-interview-questions-13840247a57a))
 
-#### What is the delegation pattern? 
+#### What is the delegation pattern?
 
 The delegation pattern is a powerful pattern used in building iOS applications. The basic idea is that one object will act on another object's behalf or in coordination with another object. The delegating object typically keeps a reference to the other object (delegate) and sends a message to it at the appropriate time. It is important to note that they have a one to one relationship.
 
 #### What is MVC?
 
-MVC stands for **Model-View-Controller**. It is a software architecture pattern for implementing user interfaces. 
+MVC stands for **Model-View-Controller**. It is a software architecture pattern for implementing user interfaces.
 
 MVC consists of three layers: the model, the view, and the controller.
 - The **model layer** is typically where the data resides (persistence, model objects, etc)
 - The **view layer** is typically where all the UI interface lies. Things like displaying buttons and numbers belong in the view layer. The view layer does not know anything about the model layer and vice versa.
-- The **controller (view controller)** is the layer that integrates the view layer and the model layer together. 
+- The **controller (view controller)** is the layer that integrates the view layer and the model layer together.
 
 #### What is MVVM?
 
 MVVM stands for **Model-View-ViewModel**. It is a software architecture pattern for implementing user interfaces.
 
-MVVM is an augmented version of MVC where the presentation logic is moved out of the controller and into the view model. The view model is responsible for handling most, if not all, of the view's display logic. 
+MVVM is an augmented version of MVC where the presentation logic is moved out of the controller and into the view model. The view model is responsible for handling most, if not all, of the view's display logic.
 
-A common occurence in MVC is where you have a massive-view-controller (some joke this is what MVC stands for). In order to shrink the size of your view controller and make the logic and readibility of your code easier to follow along, the MVVM will be used. 
+A common occurence in MVC is where you have a massive-view-controller (some joke this is what MVC stands for). In order to shrink the size of your view controller and make the logic and readibility of your code easier to follow along, the MVVM will be used.
 
 ## General / Uncategorized
 
@@ -135,13 +135,17 @@ A common occurence in MVC is where you have a massive-view-controller (some joke
 - Download the image asynchronously on a background thread so as not to block the UI so the user can keep scrolling
 - When the image has downloaded for a cell, check if that cell is still in the view or whether it has been re-used by another piece of data. If the cell has been re-used, then the image should be discarded. Otherwise, it should be switched back to the main thread to change the image on the cell. ([source](https://www.codementor.io/mattgoldspink/ios-interview-tips-questions-answers-objective-c-du1088nfb))
 
-#### What is a protocol? How do you define your own protocol? 
+#### What is a protocol? How do you define your own protocol?
 
-A protocol defines a list of required and optional methods for a class that adopts the protocol to implement. Any class is allowed to implement a protocol so that other classes can send message to it based on the protocol methods without knowing the type of class. An example of how a protocol is defined:
+A protocol defines a list of required and optional methods for a class that adopts the protocol to implement. For a class bound protocol, any class is allowed to implement the protocol so that other classes can send message to it based on the protocol methods without knowing the exact type of class.
+
+A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality” They can give also give nominal types polymorphic behavior.
+
+An example of how a protocol is defined:
 
 <details open>
 <summary>Objective-C</summary>
-    
+
 ```objective-c
 @protocol MyCustomDataSource
 - (NSUInteger)numberOfRecords;
@@ -150,9 +154,31 @@ A protocol defines a list of required and optional methods for a class that adop
 - (NSString *)titleForRecordAtIndex:(NSUInteger)index;
 @end
 ```
-</details>
 
+<summary>Swift</summary>
+
+```swift
+protocol myProtocol {
+    // Definition goes here
+}
+```
+Swift protocols are different from Objective-C protocols in that Swift Protocols support:
+
+- Protocol Inheritance
+- Protocol Extensions
+- Default Implementation
+- Associated Types (Generics)
+- They can be conformed to by Structs and Enums (value types) as well as Classes (reference types).
+
+#### What is Protocol Oriented Programming?
+
+Protocol Oriented Programming is a version of Object Oriented Programming (OOP) which emphasizes composition over inheritance as a method of functionality-sharing.
+
+<summary>Common Use Contexts</summary>
 A common instance protocols are used is providing a DataSource for UITableView or UICollectionView ([source](https://www.codementor.io/mattgoldspink/ios-interview-tips-questions-answers-objective-c-du1088nfb))
+</summary>
+
+</details>
 
 #### What is waterfall methodology and Agile methodology? What are the differences between them?
 
@@ -175,7 +201,7 @@ In the simplest sense, a class is a blueprint for an object. It describes the pr
 
 #### What is JSON? What are the pros and cons?
 
-JSON stands for JavaScript Object Notation. According to [wiki](https://en.wikipedia.org/wiki/JSON), it is a file format that uses human-readable text to transmite data objects consisting of attribute-value pairs and array data types. 
+JSON stands for JavaScript Object Notation. According to [wiki](https://en.wikipedia.org/wiki/JSON), it is a file format that uses human-readable text to transmite data objects consisting of attribute-value pairs and array data types.
 
 Pros:
 
@@ -202,7 +228,7 @@ It depends. NSSet is faster to iterate through if the order of the items in the 
 
 #### What is KVO?
 
-KVO stands for *Key-Value Observing*. It allows a controller or class to *observe* when a property value changes. 
+KVO stands for *Key-Value Observing*. It allows a controller or class to *observe* when a property value changes.
 
 ## Memory Management
 
@@ -223,13 +249,13 @@ SomeBlock* __weak weakSelf = self;
 
 #### What is memory management handled on iOS?
 
-iOS uses something called ARC which stands for Automatic Reference Counting. When an object is said to have a strong reference to it, ARC increase its retain count by 1. When the retain count of an object reaches 0, the object will typically be deallocated if there are no more strong references to it. Unlike garbage collection, ARC does not handle reference cycles automatically. 
+iOS uses something called ARC which stands for Automatic Reference Counting. When an object is said to have a strong reference to it, ARC increase its retain count by 1. When the retain count of an object reaches 0, the object will typically be deallocated if there are no more strong references to it. Unlike garbage collection, ARC does not handle reference cycles automatically.
 
 #### What is the difference between *weak* and *strong*?
 
 First, objects are *strong* by default.
 
-- *Strong* means that the reference count will be increased and the reference to it will be maintained through the life of the object. 
+- *Strong* means that the reference count will be increased and the reference to it will be maintained through the life of the object.
 - *Weak*, means that we are pointing to an object but not increasing its reference count. It’s often used when creating a parent child relationship. The parent has a strong reference to the child but the child only has a weak reference to the parent. ([source](https://medium.com/ios-os-x-development/ios-interview-questions-13840247a57a))
 
 Common instances of *weak* references are delegate properties and subview/controls of a view controller's main view since those views are already strongly held by the main view. ([source](http://stackoverflow.com/questions/11013587/differences-between-strong-and-weak-in-objective-c))
@@ -240,7 +266,7 @@ A memory leak commonly occurs when an object is allocated in such a way that whe
 
 #### What is a retain cycle?
 
-Retain cycles can occur when memory management is based on retain count. This typically occurs when two objects strongly reference each other. As a result, the retain count of either object will never reach zero and deallocated from memory (hence retaining each other). 
+Retain cycles can occur when memory management is based on retain count. This typically occurs when two objects strongly reference each other. As a result, the retain count of either object will never reach zero and deallocated from memory (hence retaining each other).
 
 #### What is the difference between *copy* and *retain*?
 
@@ -250,9 +276,9 @@ When you *retain* an object, you share the same version with whoever passed the 
 
 #### What is the difference between a stack vs a heap?
 
-A stack is a region of memory where data is added or removed in a last-in-first-out (LIFO) order. According to [Ates Goral](http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap), it is the memory set aside as scratch space for a thread of execution. Meanwhile the heap is memory set aside for dynamic allocation. Unlike the stack, you can allocate a block at any time and free it at anytime. 
+A stack is a region of memory where data is added or removed in a last-in-first-out (LIFO) order. According to [Ates Goral](http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap), it is the memory set aside as scratch space for a thread of execution. Meanwhile the heap is memory set aside for dynamic allocation. Unlike the stack, you can allocate a block at any time and free it at anytime.
 
-Note: In Objective-C, all objects are always allocated on the heap, or at least should be treated as if on the heap. 
+Note: In Objective-C, all objects are always allocated on the heap, or at least should be treated as if on the heap.
 
 ## Networking
 
@@ -268,9 +294,9 @@ Dynamic is used for subclasses of NSManagedObject. @dynamic can also be used to 
 
 #### What is the difference between _ vs self. in Objective-C?
 
-You typically use either when accessing a property in Objective-C. When you use _, you're referencing the actual instance variable directly. You should avoid this. Instead, you should use self. to ensure that any getter/setter actions are honored. 
+You typically use either when accessing a property in Objective-C. When you use _, you're referencing the actual instance variable directly. You should avoid this. Instead, you should use self. to ensure that any getter/setter actions are honored.
 
-In the case that you would write your own setter method, using _ would not call that setter method. Using self. on the property, however, would call the setter method you implemented. 
+In the case that you would write your own setter method, using _ would not call that setter method. Using self. on the property, however, would call the setter method you implemented.
 
 #### What are blocks in Objective-C?
 
@@ -280,7 +306,7 @@ The syntax to define a block literal uses the caret symbol(^):
 
 <details open>
 <summary>Objective-C</summary>
-    
+
 ```objective-c
 ^{
   NSLog(@"This is an example of a block")
@@ -306,7 +332,7 @@ Some classes of libraries and frameworks are not designed to be subclasses. For 
 
 #### What is the difference between a struct and a class?
 
-The main difference to note is that structs are value types (stored on stack) while classes are reference types (stored on heap). 
+The main difference to note is that structs are value types (stored on stack) while classes are reference types (stored on heap).
 
 Classes have capabilities that structs do not:
 - Inheritance enables one class to inherit the characteristics of another. ([source](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html))
@@ -320,7 +346,7 @@ When referring to something as implicit or explicit, it is often referring to ho
 
 <details open>
 <summary>Swift</summary>
-    
+
 ```swift
 var name: String = "onthecodepath" // explicit
 var name = "onthecodepath" // implicit
@@ -337,7 +363,7 @@ Synchronous tasks wait until the task has been completed while asynchronous task
 
 #### What is the difference between *atomic* and *non-atomic* synthesized properties?
 
-First, properties are set to *atomic* by default. 
+First, properties are set to *atomic* by default.
 
 *Atomic* properties are more likely to guarentee thread-safety because it will ensure that a value is fully set (by the setter method) or fully retrieved (by the getter method) when accessor methods are called simultaneously.
 
@@ -383,11 +409,11 @@ class ViewController: UIViewController {
 <summary>Objective-C</summary>
 
 ```objective-c
-@interface MyCustomController : UIViewController  
-@property (strong, nonatomic) UILabel *alert;  
-@end  
+@interface MyCustomController : UIViewController
+@property (strong, nonatomic) UILabel *alert;
+@end
 
-@implementation MyCustomController  
+@implementation MyCustomController
 
 - (void)viewDidLoad {
   CGRect frame = CGRectMake(100, 100, 100, 50);
@@ -400,8 +426,8 @@ class ViewController: UIViewController {
       sleep(10);
       self.alert.text = @"Waiting over";
     }
-  ); 
-}  
+  );
+}
 ```
 </details>
 <br>
@@ -424,16 +450,16 @@ DispatchQueue.global(qos: .default).async {
 
 <details>
 <summary>Objective-C</summary>
-    
+
 ```
-dispatch_async(		
+dispatch_async(
 dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
 ^{
     sleep(10);
     dispatch_async(dispatch_get_main_queue(), ^{
         self.alert.text = @"Waiting over";
     });
-}); 
+});
 
 ```
 </details>
@@ -442,13 +468,13 @@ dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
 
 #### What is the purpose of unit/UI testing? What are the benefits?
 
-Unit/UI testing are the basic of test-driven development. This development approach allows you to codify requirements for your code before you implement it. Unit tests are important to make sure that code meets its design and requirements and behaves as expected. Parts of the program are segregated and tested to ensure that individual parts are working correctly. 
+Unit/UI testing are the basic of test-driven development. This development approach allows you to codify requirements for your code before you implement it. Unit tests are important to make sure that code meets its design and requirements and behaves as expected. Parts of the program are segregated and tested to ensure that individual parts are working correctly.
 
 ## View / Storyboard
 
 #### What is the difference between viewDidLoad and viewDidAppear? Which should you use to load data from a remote server to display in the view?
 
-viewDidLoad is only called when the view is loaded (after loadView is called). viewDidAppear, on the other hand, is called everytime the view appears on the device. 
+viewDidLoad is only called when the view is loaded (after loadView is called). viewDidAppear, on the other hand, is called everytime the view appears on the device.
 
 If the data is static for the most part, it can be loaded in viewDidLoad and cached. But if the data is dynamic and likely to change often, it is preferrable to use viewDidAppear. In both instances, data should be loaded asynchronously on a background thread to avoid blocking the UI.
 
