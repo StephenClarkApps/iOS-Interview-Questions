@@ -2,7 +2,7 @@
 
 ## What is this for?
 
-Time is important. It's frustrating and time-consuming to have to search endlessly in order to practice iOS interview questions. The goal of this open-source project is to collect as many iOS interview questions together along with answers in order to save you time.
+The goal of this open-source project is to collect as many iOS interview questions together along with answers in order to save you time.
 
 ## Practice
 
@@ -92,6 +92,12 @@ First, managed object context is an instance of NSManagedObjectContext. It is th
 
 NSFetchRequest is the class responsible for fetching from Core Data. Fetch requests can be used to fetch a set of objects meeting a certain criteria, individual values and more. ([source](https://medium.com/ios-os-x-development/50-ios-interview-questions-and-answers-part-2-45f952230b9f))
 
+#### What is FMDB? and What is SQLite?
+
+FMDB is a wrapper for SQLite which is widely used in iOS development.
+
+SQLite is light weight version of SQL which is commonly used to store data in our iOS applications.
+
 ## Debugging
 
 #### What are some ways of debugging in iOS?
@@ -126,6 +132,10 @@ MVVM stands for **Model-View-ViewModel**. It is a software architecture pattern 
 MVVM is an augmented version of MVC where the presentation logic is moved out of the controller and into the view model. The view model is responsible for handling most, if not all, of the view's display logic.
 
 A common occurence in MVC is where you have a massive-view-controller (some joke this is what MVC stands for). In order to shrink the size of your view controller and make the logic and readibility of your code easier to follow along, the MVVM will be used.
+
+### What is MVVM-C? and What is the Coordinator Pattern?
+
+...
 
 ## General / Uncategorized
 
@@ -180,7 +190,7 @@ A common instance protocols are used is providing a DataSource for UITableView o
 
 </details>
 
-#### What is waterfall methodology and Agile methodology? What are the differences between them?
+#### What a Waterfall methodology and an Agile methodology? What are the differences between them?
 
 Waterfall methodology is a sequential model for software development. It is separated into a sequence of pre-defined phases including feasibility, planning, design, build, test, production, and support.
 
@@ -201,7 +211,17 @@ In the simplest sense, a class is a blueprint for an object. It describes the pr
 
 #### What is JSON? What are the pros and cons?
 
-JSON stands for JavaScript Object Notation. According to [wiki](https://en.wikipedia.org/wiki/JSON), it is a file format that uses human-readable text to transmite data objects consisting of attribute-value pairs and array data types.
+JSON stands for JavaScript Object Notation and is a common format for communicating data between different systems (principally on the internet).
+
+It uses a limited number of data types in order to keep things fairly simple; these data types include string, bool, arrays, object/dictionary, number, and null. JSON is derived from JavaScript, the JSON format having been originally specified as a separate standard in the 2000s but with competing versions of the standard. However, I-JSON (short for “Internet JSON”), proposed in 2015, “is a restricted profile of JSON designed to maximize interoperability and increase confidence that software can process it successfully with predictable results” (RFC 7493).
+
+These days JSON has become a language-independent format with many programming languages and their associated libraries supporting conversions to and from this format from there own data-types.
+
+Decoding JSON
+
+On the side of the Swift code in our apps, we need to implement some method of converting between the JSON data, and our locally defined objects. In the past, we might have relied on the JSONSerialization class to do this, but these days, in the Swift language, we typically will take advantage of Codable types for our data layer, and we use these with JSONEncoder and JSONDecoder classes.
+
+The Pros and Cons of Json
 
 Pros:
 
@@ -244,12 +264,16 @@ Instead, capturing a weak reference to self is recommended in order to avoid thi
 ```objective-c
 SomeBlock* __weak weakSelf = self;
 ```
+
+<summary>Swift</summary>
+In Swift, to deal with what ARC (automatic reference counting) has given us, we can similarly use code like this with our "closures":
+...
 </details>
 
 
 #### What is memory management handled on iOS?
 
-iOS uses something called ARC which stands for Automatic Reference Counting. When an object is said to have a strong reference to it, ARC increase its retain count by 1. When the retain count of an object reaches 0, the object will typically be deallocated if there are no more strong references to it. Unlike garbage collection, ARC does not handle reference cycles automatically.
+iOS uses something called ARC which stands for Automatic Reference Counting. When an object is said to have a strong reference to it, ARC increase its retain count by 1. When the retain count of an object reaches 0, the object will typically be deallocated if there are no more strong references to it. Unlike garbage collection, ARC does not handle reference cycles automatically. Before ARC we had to deallocate manually, however the work of Chris Latner and other brough the automatic method to both Objective-C and Swift.
 
 #### What is the difference between *weak* and *strong*?
 
@@ -274,13 +298,21 @@ Calling *retain* on an object will increase its *retain* count by one. When the 
 
 When you *retain* an object, you share the same version with whoever passed the object to you. But when you *copy* an object, you do not share the same version of the object that was passed to you. Instead, a duplicate of that object is created with duplicated values.
 
-#### What is the difference between a stack vs a heap?
+#### What is the difference between the stack vs the heap?
 
-A stack is a region of memory where data is added or removed in a last-in-first-out (LIFO) order. According to [Ates Goral](http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap), it is the memory set aside as scratch space for a thread of execution. Meanwhile the heap is memory set aside for dynamic allocation. Unlike the stack, you can allocate a block at any time and free it at anytime.
+The stack is a region of memory where data is added or removed in a last-in-first-out (LIFO) order. According to [Ates Goral](http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap), it is the memory set aside as scratch space for a thread of execution. Meanwhile the heap is memory set aside for dynamic allocation. Unlike the stack, you can allocate a block at any time and free it at anytime.
 
 Note: In Objective-C, all objects are always allocated on the heap, or at least should be treated as if on the heap.
 
 ## Networking
+
+For networking in iOS programming we now a days might often use native classes from  core Cocoa, yet in the past it was more common to use third-party libraries such as alamofire.
+
+#### Using URLRequest and URLSession
+
+Classes we often use for networking include URLSession, and URLRequest which we use to formuale our requests.
+
+
 
 ## Objective-C
 
@@ -371,10 +403,12 @@ First, properties are set to *atomic* by default.
 
 #### What is GCD and how is it used?
 
-GCD stands for Grand Central Dispatch. According to [Ray Wenderlich](https://www.raywenderlich.com/60749/grand-central-dispatch-in-depth-part-1), it offers the following benefits
+GCD stands for Grand Central Dispatch. , it offers the following benefits
 - Improving your app's responsiveness by helping to defer computationally expensive tasks and run them in the background.
 - Providing an easier concurrency model than locks and threads and helps to avoid concurrency bugs.
 - Potentially optimize your code with higher performance primitives for common patterns such as singletons.
+
+**Source:** RayWenderlich.com
 
 In other words, GCD provides and manages queues of tasks in the iOS app. This is one of the most commonly used API to manage concurrent code and execute operations asynchronously. Network calls are often performed on a background thread while things like UI updates are executed on the main thread.
 
