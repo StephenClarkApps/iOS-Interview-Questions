@@ -135,7 +135,17 @@ A common occurence in MVC is where you have a massive-view-controller (some joke
 
 ### What is MVVM-C? and What is the Coordinator Pattern?
 
-...
+#### The Coordinator Pattern
+The Coordinator Pattern is a Structural / Architectural Design Pattern that defines how we deal with screen flow, and navigation in our apps.
+
+The Coordinator pattern attempts to address issues with the MVC and MVVM patterns, which, in iOS, can cause our View Controllers to be dependent on each other and prevent effective View Controller re-use.
+
+##### Back Story of the Pattern
+The Coordinator pattern is a design pattern originally proposed by Soroush Khanlou in published articles and at a presentation at an iOS development back around 2014.
+
+##### Implementing the Pattern
+
+Implemting the Coordinator Pattern in iOS (either in Swift or Objectieve-C) starts with defining a simple protocol.
 
 ## General / Uncategorized
 
