@@ -133,7 +133,7 @@ MVVM is an augmented version of MVC where the presentation logic is moved out of
 
 A common occurence in MVC is where you have a massive-view-controller (some joke this is what MVC stands for). In order to shrink the size of your view controller and make the logic and readibility of your code easier to follow along, the MVVM will be used.
 
-### What is MVVM-C? and What is the Coordinator Pattern?
+###  What is the Coordinator Pattern?
 
 #### The Coordinator Pattern
 The Coordinator Pattern is a Structural / Architectural Design Pattern that defines how we deal with screen flow, and navigation in our apps.
@@ -146,6 +146,10 @@ The Coordinator pattern is a design pattern originally proposed by Soroush Khanl
 ##### Implementing the Pattern
 
 Implemting the Coordinator Pattern in iOS (either in Swift or Objectieve-C) starts with defining a simple protocol.
+
+#### What is MVVM-C ?
+
+This is an approach combining MVVM with the Coordinator Pattern, and it may or may not make use of an Rx or Reactive binding between your View Models and your Views..
 
 ## General / Uncategorized
 
@@ -227,18 +231,18 @@ It uses a limited number of data types in order to keep things fairly simple; th
 
 These days JSON has become a language-independent format with many programming languages and their associated libraries supporting conversions to and from this format from there own data-types.
 
-Decoding JSON
+#### Decoding JSON
 
 On the side of the Swift code in our apps, we need to implement some method of converting between the JSON data, and our locally defined objects. In the past, we might have relied on the JSONSerialization class to do this, but these days, in the Swift language, we typically will take advantage of Codable types for our data layer, and we use these with JSONEncoder and JSONDecoder classes.
 
-The Pros and Cons of Json
+#### The Pros and Cons of Json
 
-Pros:
+#### Pros:
 
 - It is lighter than XML meaning that it can represent the same data in XML in fewer bytes. This makes network transmissions and read/writes faster
 - Since it is native to JavaScript, computationally-expensive XSL tranformations are not needed in order to extract data
 
-Cons:
+#### Cons:
 
 - Not as widespread as XML
 - Data is not readily streamable and has to be broken up into individual objects
