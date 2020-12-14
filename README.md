@@ -10,19 +10,19 @@ Use the Table of Contents to practice and test your knowledge. It doesn't show t
 
 ## Table of Contents
 
-- [Database](https://github.com/onthecodepath/iOS-Interview-Questions#database)
+- [Database](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#database)
     - What is Core Data?
     - When would you use Core Data over NSUserDefault?
     - What is a managed object context?
     - What is NSFetchRequest?
-- [Debugging](https://github.com/onthecodepath/iOS-Interview-Questions#debugging)
+- [Debugging](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#debugging)
     - What are some ways of debugging in iOS?
-- [Design Pattern](https://github.com/onthecodepath/iOS-Interview-Questions#design-patterns)
+- [Design Pattern](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#design-patterns)
     - What is Singleton Pattern?
     - What is the delegation pattern?
     - What is MVC?
     - What is MVVM?
-- [General / Uncategorized](https://github.com/onthecodepath/iOS-Interview-Questions#general--uncategorized)
+- [General / Uncategorized](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#general--uncategorized)
     - What considerations do you need when writing a UITableViewController which shows images downloaded from a remote server?
     - What is a protocol? How do you define your own protocol?
     - What is waterfall methodology and Agile methodology? What are the differences between them?
@@ -31,7 +31,7 @@ Use the Table of Contents to practice and test your knowledge. It doesn't show t
     - What is the difference between not-running, inactive, active, background and suspended execution states?
     - Is it faster to iterate through an NSArray or an NSSet?
     - What is KVO?
-- [Memory Management](https://github.com/onthecodepath/iOS-Interview-Questions#memory-management)
+- [Memory Management](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#memory-management)
     - Why do you generally create a weak reference when using self in a block?
     - What is memory management handled on iOS?
     - What is the difference between *weak* and *strong*?
@@ -39,35 +39,35 @@ Use the Table of Contents to practice and test your knowledge. It doesn't show t
     - What is a retain cycle?
     - What is the difference between copy and retain?
     - What is the difference between a stack vs a heap?
-- [Networking](https://github.com/onthecodepath/iOS-Interview-Questions#networking)
-- [Objective-C](https://github.com/onthecodepath/iOS-Interview-Questions#objective-c)
+- [Networking](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#networking)
+- [Objective-C](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#objective-c)
     - What is synthesize in Objective-C?
     - What is dynamic in Objective-C?
     - What is the difference between _name vs self.name?
     - What are blocks in Objective-C?
     - What is the difference between category and extension in Objective-C?
-- [Swift](https://github.com/onthecodepath/iOS-Interview-Questions#swift)
+- [Swift](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#swift)
     - What is the difference between public and open? Why is it important to have both?
     - What is the difference between var and let?
     - What is the difference between a struct and a class?
     - What is the difference between implicit and explicit?
-- [Thread Management](https://github.com/onthecodepath/iOS-Interview-Questions#thread-management)
+- [Thread Management](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#thread-management)
     - What is the difference between synchronous and asynchronous task?
     - What is the difference between atomic and non-atomic synthesized properties?
     - What is GCD and how is it used?
     - Explain the difference between Serial vs Concurrent.
-- [Unit Testing / UI Testing](https://github.com/onthecodepath/iOS-Interview-Questions#unit-testing--ui-testing)
+- [Unit Testing / UI Testing](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#unit-testing--ui-testing)
     - What is the purpose of unit testing? What are the benefits?
-- [View / Storyboard](https://github.com/onthecodepath/iOS-Interview-Questions#view--storyboard)
+- [View / Storyboard](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#view--storyboard)
     - What is the difference between viewDidLoad and viewDidAppear? Which should you use to load data from a remote server to display in the view?
     - What is the difference between frame and bound of a UIView?
     - What is the reuseIdentifier for?
     - What is autolayout?
-- [Algorithm Resources](https://github.com/onthecodepath/iOS-Interview-Questions#algorithm-resources)
+- [Algorithm Resources](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#algorithm-resources)
     - EKAlgorithm
     - swift-algorithm-club
-- [Contributing](https://github.com/onthecodepath/iOS-Interview-Questions#contributing)
-- [Thank You](https://github.com/onthecodepath/iOS-Interview-Questions#thank-you)
+- [Contributing](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#contributing)
+- [Thank You](https://github.com/StephenClarkApps/iOS-Interview-Questions/iOS-Interview-Questions#thank-you)
 - [Flashcards](https://quizlet.com/serg_tsogtbaatar/folders/ios-interviews/sets)
     - The interview questions as flash card sets according to topic.
 
