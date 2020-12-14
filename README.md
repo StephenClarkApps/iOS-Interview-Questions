@@ -204,6 +204,42 @@ A common instance protocols are used is providing a DataSource for UITableView o
 
 </details>
 
+#### What is Dependency Injection and How do we Use It?
+
+Dependency Injection – is a technique whereby one object (or static method) supplies the dependencies of another object. A dependency is an object that can be used (a service). An injection is the passing of a dependency to a dependent object (a client) that would use it (source: Wikipedia).
+
+iOS ViewController Example
+```
+// Your View Controller can have a custom init into which we can pass dependencies
+init(destination: HolidayDestination, traveler: Traveler) {
+    self.destination = destination
+    self.traveler = traveler
+    super.init(nibName: nil, bundle: nil)
+}
+ 
+// And from the place that your going to present the VC we create an instance of
+// the VC passing in the dependencies like this
+ 
+let holidatyDestinationViewController = DestinationViewController(destination: dest, 
+                                                                     traveler: traveler)
+// Then we present with our custom presentation logic
+ ```
+ 
+#### What about the Principle of Dependency Inversion?
+
+One of the SOLID design principles (https://en.wikipedia.org/wiki/SOLID)...
+
+""" In object-oriented design, the dependency inversion principle is a specific form of decoupling software modules. When following this principle, the conventional dependency relationships established from high-level, policy-setting modules to low-level, dependency modules are reversed, thus rendering high-level modules independent of the low-level module implementation details. The principle states:
+
+High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g., interfaces).
+
+Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.
+
+By dictating that both high-level and low-level objects must depend on the same abstraction, this design principle inverts the way some people may think about object-oriented programming.""" (Source: Wikipedia)
+
+**Sources**
+https://medium.com/flawless-app-stories/practical-dependency-inversion-in-swift-1c1142161a8
+ 
 #### What a Waterfall methodology and an Agile methodology? What are the differences between them?
 
 Waterfall methodology is a sequential model for software development. It is separated into a sequence of pre-defined phases including feasibility, planning, design, build, test, production, and support.
