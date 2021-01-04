@@ -153,7 +153,23 @@ This is an approach combining MVVM with the Coordinator Pattern, and it may or m
 
 #### What are the SOLID design principles?
 
-...
+SOLID stands for:
+
+S - Single-responsiblity Principle
+O - Open-closed Principle
+L - Liskov Substitution Principle
+I - Interface Segregation Principle
+D - Dependency Inversion Principle
+
+The Single-Responsibility principle states that "A class should have one and only one reason to change, meaning that a class should have only one job".
+
+The Open-Closed Principle states that "Objects or entities should be open for extension but closed for modification".
+
+Liskov's Substitution Principle states that "Let q(x) be a property provable about objects of x of type T. Then q(y) should be provable for objects y of type S where S is a subtype of T", in general terms then this means in practice that "every subclass or derived class should be substitutable for their base or parent class".
+
+The Interface Segregation Principle states that "A client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use".
+
+The Dependency Inversion Principle states that "Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions".
 
 #### What is Dependency Injection and How do we Use It?
 
