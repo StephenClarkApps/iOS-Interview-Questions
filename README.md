@@ -321,6 +321,13 @@ It depends. NSSet is faster to iterate through if the order of the items in the 
 
 KVO stands for *Key-Value Observing*. It allows a controller or class to *observe* when a property value changes.
 
+**Examples**
+
+??
+
+REF: https://nalexn.github.io/kvo-guide-for-key-value-observing/
+
+
 ## Memory Management
 
 #### Why do you generally create a weak reference when using self in a block?
@@ -355,9 +362,19 @@ First, objects are *strong* by default.
 
 Common instances of *weak* references are delegate properties and subview/controls of a view controller's main view since those views are already strongly held by the main view. ([source](http://stackoverflow.com/questions/11013587/differences-between-strong-and-weak-in-objective-c))
 
+"Important places to use weak variables are in cases where you have potential retain cycles. A retain cycle is what happens when two objects both have strong references to each other. If 2 objects have strong references to each other, ARC will not generate the appropriate release message code on each instance since they are keeping each other alive". 
+
+**Weak vs Unowned**
+
+“Use a weak reference whenever it is valid for that reference to become nil at some point during its lifetime. Conversely, use an unowned reference when you know that the reference will never be nil once it has been set during initialization.”
+
+
+([source](https://krakendev.io/blog/weak-and-unowned-references-in-swift))
+
+
 #### What is a memory leak?
 
-A memory leak commonly occurs when an object is allocated in such a way that when it is no longer in use or needed, it is not released. In iOS programming, you create certain objects with weak references in order to avoid a strong to strong relationship that creates a retain cycle and a memory leak.
+A memory leak commonly occurs when an object is allocated in such a way that ***when it is no longer in use or needed, it is not released***. In iOS programming, you create certain objects with weak references in order to avoid a strong to strong relationship that creates a retain cycle and a memory leak.
 
 #### What is a retain cycle?
 
