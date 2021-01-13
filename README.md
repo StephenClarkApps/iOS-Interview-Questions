@@ -440,11 +440,16 @@ A category and extension are similar in functionality where they can add additio
 
 ## Swift
 
+#### Theme: Access Control
 #### What is the difference between public and open? Why is it important to have both?
 
 Open access imposes limitations on class inheritance. Classes declared with open level access can be subclassed by modules they are defined in, modules that import the module in which the class is defined, and class members as well. While this sounds similar to the public access level defined in Swift 2, there is a small difference. In Swift 3, the meaning of public access level means that classes declared public can only be subclassed in the module they are defined in. This includes public class members which can be overridden by subclasses defined int he module they are defined in.
 
 Some classes of libraries and frameworks are not designed to be subclasses. For example, in the Core Data framework, Apple states that some methods of NSManagedObject should not be overridden. To prevent any unexpected behavior that may result from overriding those methods, Apple declares those methods public rather than open. As a result, those methods are not marked as open for developers to override. ([source](https://cocoacasts.com/what-is-the-difference-between-public-and-open-in-swift-3/))
+
+#### What are the internal, fileprivate and private access control modifiers used for?
+
+
 
 #### What is the difference between *var* and *let*?
 
@@ -491,14 +496,48 @@ First, properties are set to *atomic* by default.
 
 #### What is GCD and how is it used?
 
-GCD stands for Grand Central Dispatch. , it offers the following benefits
+GCD stands for Grand Central Dispatch, it provides and manages Queues of tasks in the iOS apps, it offers the following benefits
 - Improving your app's responsiveness by helping to defer computationally expensive tasks and run them in the background.
 - Providing an easier concurrency model than locks and threads and helps to avoid concurrency bugs.
 - Potentially optimize your code with higher performance primitives for common patterns such as singletons.
 
 **Source:** RayWenderlich.com
 
-In other words, GCD provides and manages queues of tasks in the iOS app. This is one of the most commonly used API to manage concurrent code and execute operations asynchronously. Network calls are often performed on a background thread while things like UI updates are executed on the main thread.
+GCD is one of the most commonly used API to manage concurrent code and execute operations asynchronously. Network calls are often performed on a background thread while things like UI updates are executed on the main thread.
+
+In the past we had to work directly with “threads” and work with trying to run things on different threads for our apps. GCD is a Framework to make dealing with threads easier: essentially it allows things to be done using ‘Queues’ which are an abstraction on threads to help make things easier. GCD is a block-based API and provides a set of methods that you call and allow tasks to be run on given queues and to get it working well we usually need to pipe in a good bit of boilerplate code to use. Criticisms of GCD can include it possibly being a bit cumbersome and low level to use regularly in applications. One of the things that can make things easier and nicer is using **NSOperations** on top of GCD in order to abstract out and wrap things into objects without having to directly call GCD functions. One unit of work can now be represented by an object that you can refer to, pass around, and pause, and cancel, making it potentially easier to orchestrate a set of work.
+
+Because GCD is block/closure based, things can start to get convoluted when we get into more complex scenarios leading to what is known as “callback hell” (meaning scenarios wherein the completion handler of one method you might them be doing another async call and so on). One solution to prevent callback hell is to use something called PromiseKit which is a swift implementation of “Promises” letting you chain your asynchronous work such that if you have two or three operations that you wanted to run but which depend on the result of previous operations without nesting blocks or anything like that. “Promises tame asynchronicity by letting you write code as a series of actions based on events“(https://www.raywenderlich.com/9208-getting-started-with-promisekit).
+
+**The RxSwift Solution**
+
+RxSwift can do everything that PromiseKit can do, and is also at high level of abstraction, but ReactiveX allows us to do even more advanced things off the back of an Rx solution that the other asynchronous work solutions do not give us. The ReactiveX Standard “extends the observer pattern to support sequences of data and/or events and adds operators that allow you to compose sequences together declaratively while abstracting away concerns about things like low-level threading, synchronization, thread-safety, concurrent data structures, and non-blocking I/O.” 
+
+So RxSwift enables us to build apps using a declarative approach. Rx is “an API for asynchronous programming with observable streams”: So being within this standard, RxSwift is really an asynchronous programming library based on using what are called “Observables” which are just sequences of data or events that you can react to. So everything in RXSwift is either a sequence or something that observes a sequence.
+
+**Benefits of RxSwift**
+
+RxSwift can make your code simpler, cleaner and easier to maintain. Some of the key benefits are advertised to be:
+
+- It’s Composable
+
+- It’s Reusable because it’s composable.
+
+- It’s declarative because definitions are immutable and only data changes.
+
+It’s understandable and concise through raising the level of abstraction and removing transient states, it’s stable because Rx code is thoroughly unit tested, it can be less stateful because you are modeling applications as unidirectional data flows, and it’s more likely to be without leaks because resource management should be easy (Ref#: B).
+
+#### The Swift Combine Framework
+
+The Swift team have now come up with what is essentially there own take on RxSwift which is called the `Combine` framwork.
+
+The Combine framework provides a declarative Swift API for processing values over time. These values can represent many kinds of asynchronous events. Combine declares publishers to expose values that can change over time, and subscribers to receive those values from the publishers.
+
+The Publisher protocol declares a type that can deliver a sequence of values over time. Publishers have operators to act on the values received from upstream publishers and republish them.
+
+At the end of a chain of publishers, a Subscriber acts on elements as it receives them. Publishers only emit values when explicitly requested to do so by subscribers. This puts your subscriber code in control of how fast it receives events from the publishers it’s connected to.
+
+Source: https://developer.apple.com/documentation/combine
 
 #### Explain the difference between Serial vs Concurrent
 
@@ -604,6 +643,8 @@ If the data is static for the most part, it can be loaded in viewDidLoad and cac
 
 The *frame* of a UIView is the region relative to the superview it is contained within while the *bounds* of a UIView is the region relative to its own coordinate system.
 
+Exapanding on these properties further: `frame` refers to a view's location and size using the parent view's coordinate system and it's thus important for placing the view in the parent. Whereas `bounds` means a view's location and size using its own coordinate system, and is important for placing the view's content or subviews within itself.
+
 #### What is the reuseIdentifier for?
 
 The *reuseIdentifier* indicates that cells for a UITableView (or UICollectionView) can be reused. UITableView maintains an internal cache of UITableViewCell with the appropriate identifier and allows them to be reused when dequeueForCellWithReuseIdentifier is called. As a result, this increases performance of UITableView since a new view does not have to be created for a cell.
@@ -611,6 +652,14 @@ The *reuseIdentifier* indicates that cells for a UITableView (or UICollectionVie
 #### What is Auto Layout?
 
 Auto Layout is used to dynamically calculate the size and position of views based on constraints.
+
+Auto Layout defines your user interface using a series of constraints. Constraints typically represent a relationship between two views. Auto Layout then calculates the size and location of each view based on these constraints. This produces layouts that dynamically respond to both internal and external changes.
+
+For example, you can constrain a button so that it is horizontally centered with an Image view and so that the button’s top edge always remains 8 points below the image’s bottom. If the image view’s size or position changes, the button’s position automatically adjusts to match.
+
+Traditionally, apps laid out their user interface by programmatically setting the frame for each view in a view hierarchy. The frame defined the view’s origin, height, and width in the superview’s coordinate system. However, whilst this could give a greater level of precise control in some cases, it involves having to manage all the elements of the layout, instead one can let auto layout do a lot of the heavy lifting for you. 
+
+Source: https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html
 
 # Algorithm Resources
 
