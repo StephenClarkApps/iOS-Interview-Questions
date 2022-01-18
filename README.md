@@ -92,6 +92,13 @@ First, managed object context is an instance of NSManagedObjectContext. It is th
 
 NSFetchRequest is the class responsible for fetching from Core Data. Fetch requests can be used to fetch a set of objects meeting a certain criteria, individual values and more. ([source](https://medium.com/ios-os-x-development/50-ios-interview-questions-and-answers-part-2-45f952230b9f))
 
+#### Is Core Data type safe?
+
+Core Data is not typesafe, whilst one may use different queues with Core Data, "Core Data expects to be run on a single thread." 
+
+However, there are a range of solutions and methods including cocoapods which look to deal with the posibility of issues caused by the above.
+
+
 #### What is FMDB? and What is SQLite?
 
 FMDB is a wrapper for SQLite which is widely used in iOS development.
