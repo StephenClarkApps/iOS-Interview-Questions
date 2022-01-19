@@ -80,6 +80,8 @@ Use the Table of Contents to practice and test your knowledge. It doesn't show t
 
 Core Data is a framework that is used to manage model layer objects. It has the ability to persist object graphs to a persistent store. Data is organized into relational entity-attribute model.
 
+It's in fact a SQLite database API (basically a wrapper for SQLite). By setting up CoreData properly, an application can store and retrieve the internal state of a class rapidly. The CoreData stack implementation has changed several times over the course of time and can now incorporate cloud storage (optionally). We might actually choose to use something simpler like a simple SQLite implementation using something like FMDB if we wanna have something cleaner and where we have no intention of incorporating cloud storage with Core Data.
+
 #### When would you use Core Data over NSUserDefault?
 
 NSUserDefault is typically used to store small bits of data (settings, preferences, etc.). Core Data is used to store a large list of elements.
@@ -98,6 +100,37 @@ Core Data is not typesafe, whilst one may use different queues with Core Data, "
 
 However, there are a range of solutions and methods including cocoapods which look to deal with the posibility of issues caused by the above.
 
+#### Using Core Data with SwiftUI
+
+*Here we can only breifly touch on this, see the links for full understanding.*
+
+Source (and more details): https://www.hackingwithswift.com/quick-start/swiftui/how-to-configure-core-data-to-work-with-swiftui
+
+"""
+If you create a new project and check both SwiftUI and Core Data, Xcode does a pretty good job of getting you towards a working configuration. Specifically, it:
+
+Creates an empty YourProjectName.xcdatamodeld model file with an example configuration.
+
+Adds a Persistence.swift file that wraps up Core Data neatly in one place.
+
+Injects the context into the initial content view’s environment using the managedObjectContext key.
+
+Provides sample code in ContentView to create, read, and delete example data.
+
+That provides for us the complete ability to use Core Data fetch requests from within SwiftUI.
+"""
+
+#### Using CoreData with SwiftUI -> @FetchRequest
+
+"""
+Once your managed object context is attached to the environment under the .managedObjectContext key, you can use the @FetchRequest property wrapper to make properties in your views that create and manage Core Data fetch requests automatically.
+
+Creating a fetch request requires two pieces of information: the entity you want to query, and a sort descriptor that determines the order in which results are returned. In my example setup we created a ProgrammingLanguages entity that had name and creator attributes, so we could create a fetch request for it like this:
+
+`@FetchRequest(entity: ProgrammingLanguage.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ProgrammingLanguage.name, ascending: true)]) var languages: FetchedResults<ProgrammingLanguage>`
+"""
+
+Source: https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-core-data-fetch-request-using-fetchrequest
 
 #### What is FMDB? and What is SQLite?
 
@@ -335,6 +368,20 @@ KVO stands for *Key-Value Observing*. It allows a controller or class to *observ
 REF: https://nalexn.github.io/kvo-guide-for-key-value-observing/
 
 
+#### Generic Programming
+
+A style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters.
+
+This approach, pioneered by the ML programming language in 1973, permits writing common functions or types that differ only in the set of types on which they operate when used, thus reducing duplication.
+
+Such software entities are known as generics in Python, Ada, C#, Delphi, Eiffel, F#, Java, Nim, Rust, Swift, TypeScript and Visual Basic .NET. They are known as parametric polymorphism in ML, Scala, Julia, and Haskell (the Haskell community also uses the term “generic” for a related but somewhat different concept); templates in C++ and D; and parameterized types in the influential 1994 book Design Patterns.
+
+The term “generic programming” was originally coined by David Musser and Alexander Stepanov in a more specific sense than the above, to describe a programming paradigm whereby fundamental requirements on types are abstracted from across concrete examples of algorithms and data structures and formalized as concepts, with generic functions implemented in terms of these concepts, typically using language genericity mechanisms as described above.
+
+#### Graph 
+
+A Graph is an important data structure in computer science; it is defined as a collection of nodes with “edges” between some of the nodes. When we talk about Graphs that category includes Trees, however not all Graphs are Trees.
+
 ## Memory Management
 
 #### Why do you generally create a weak reference when using self in a block?
@@ -523,6 +570,15 @@ In the past we had to work directly with “threads” and work with trying to r
 
 Because GCD is block/closure based, things can start to get convoluted when we get into more complex scenarios leading to what is known as “callback hell” (meaning scenarios wherein the completion handler of one method you might them be doing another async call and so on). One solution to prevent callback hell is to use something called PromiseKit which is a swift implementation of “Promises” letting you chain your asynchronous work such that if you have two or three operations that you wanted to run but which depend on the result of previous operations without nesting blocks or anything like that. “Promises tame asynchronicity by letting you write code as a series of actions based on events“(https://www.raywenderlich.com/9208-getting-started-with-promisekit).
 
+#### RxSwift
+
+RxSwift is a Swift framework and is also an example of an implementation of Reactive Programming based on the ReactiveX Standard first developed in Microsoft in implementations such as rx.NET – this standard is essentially a standard for libraries which can be used across a range of different programming languages which are all used for *composing asynchronous and event-based programs by making use of Observable Sequences*. The ReactiveX Standard “extends the observer pattern to support sequences of data and/or events and adds operators that allow you to compose sequences together declaratively while abstracting away concerns about things like low-level threading, synchronization, thread-safety, concurrent data structures, and non-blocking I/O.” 
+
+#### RxSwift -> Marble Diagram
+
+A Marble Diagram visualizes the transformation of an observable sequence. It consists of the input stream on top, the output stream at the bottom and the actual transformation function in the middle”. Typically in a marble diagram, time flows to the right, and the diagram describes how values (“marbles”) are emitted on the Observable execution.
+
+
 **The RxSwift Solution**
 
 RxSwift can do everything that PromiseKit can do, and is also at high level of abstraction, but ReactiveX allows us to do even more advanced things off the back of an Rx solution that the other asynchronous work solutions do not give us. The ReactiveX Standard “extends the observer pattern to support sequences of data and/or events and adds operators that allow you to compose sequences together declaratively while abstracting away concerns about things like low-level threading, synchronization, thread-safety, concurrent data structures, and non-blocking I/O.” 
@@ -540,6 +596,44 @@ RxSwift can make your code simpler, cleaner and easier to maintain. Some of the 
 - It’s declarative because definitions are immutable and only data changes.
 
 It’s understandable and concise through raising the level of abstraction and removing transient states, it’s stable because Rx code is thoroughly unit tested, it can be less stateful because you are modeling applications as unidirectional data flows, and it’s more likely to be without leaks because resource management should be easy (Ref#: B).
+
+#### RxSwift - Observables 
+
+These are an Rx concept used in the likes of RxSwift. They allow us to emit events, have Lots of static convenience methods, allow for Subscriptions. 
+
+There are two types: of Observable:  An observable is “cold” if its underlying producer is created and activated during subscription. An observable is “hot” if its underlying producer is either created or activated outside of subscription.
+
+// `just` operator is used to create an Observable that emits a particular item
+// i.e. a Just operator converts an item into an Observable that emits that item.
+
+let justObservableSource = Observable.just("This is just...")
+
+justObservableSource.subscribe {
+    print($0)
+}
+
+// `of` operator is used to create an observables array or an observable of individual type.
+let ofObservable = Observable.of(1,2,3,4)
+
+let ofObservable2 = Observable.of([1,2,3,4],[11,22,33,44])
+
+// `from` operator creates an observable of individual type from an array of elements.
+
+let fromObservable = Observable.from([1,2,3,4,5])
+
+Source: https://medium.com/@priya_talreja/rxswift-observables-7809b474aab
+
+#### RxSwift -> DisposeBag
+
+A method that RxSwift uses for memory management.
+
+// https://www.stepintoswift.com/rxswift-disposebag
+
+#### Functional Reactive Programming
+
+Functional Reactive Programming (FRP) is a Programming Paradigm for reactive programming(or asynchronous dataflow programming) through making use of the tools of functional programming (e.g. map, reduce, filter). With FRP in Swift, we have the option to use tools like RxSwift and RxCocoa to build asynchronous reactive applications which can make for easier to maintain coder and cleaner code. FRP per-se was developed by Conal Elliott from Microsoft Research, *although his definition is quite strict with most modern so-called FRP not meeting his criteria in terms of requirements for use of denotations and continuous-time.* 
+
+More loosely defined however Functional Reactive Programming is a programming paradigm which can be defined by the combination of the two concepts of Reactive Programming which focuses on asynchronous data streams which you can listen to and react to accordingly, and secondly Functional Programming, which emphasizes calculations via mathematical-style functions, immutability and expressiveness, and minimizes the use of variables and state.
 
 #### The Swift Combine Framework
 
