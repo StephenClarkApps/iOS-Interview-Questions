@@ -137,7 +137,7 @@ Source: https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-cor
 FMDB is a wrapper for SQLite which is widely used in iOS development.
 
 SQLite is light weight version of SQL which is commonly used to store data in our iOS applications.
-
+****
 ## Debugging
 
 #### What are some ways of debugging in iOS?
@@ -145,7 +145,7 @@ SQLite is light weight version of SQL which is commonly used to store data in ou
 - NSLog and print functions can be used for output into console.
 - Breakpoints can also be used together with the Debug bar and Variables view as an alternative.
 - Senior devs often use other tools such as Instruments and Crash Logs instead of the two above.
-
+****
 ## Design Patterns
 
 #### What is Singleton Pattern?
@@ -190,8 +190,8 @@ Implemting the Coordinator Pattern in iOS (either in Swift or Objectieve-C) star
 #### What is MVVM-C ?
 
 This is an approach combining MVVM with the Coordinator Pattern, and it may or may not make use of an Rx or Reactive binding between your View Models and your Views..
-
-#### What are the SOLID design principles?
+****
+### What are the SOLID design principles?
 
 SOLID stands for:
 
@@ -246,16 +246,16 @@ By dictating that both high-level and low-level objects must depend on the same 
 
 **Sources**
 https://medium.com/flawless-app-stories/practical-dependency-inversion-in-swift-1c1142161a8
-
+****
 ## General / Uncategorized
 
-#### What considerations do you need when writing a UITableViewController which shows images downloaded from a remote server?
+#### **What considerations do you need when writing a UITableViewController which shows images downloaded from a remote server?**
 
 - Only download the image when the cell is scrolled into view (when cellForRowAtIndexPath is called)
 - Download the image asynchronously on a background thread so as not to block the UI so the user can keep scrolling
 - When the image has downloaded for a cell, check if that cell is still in the view or whether it has been re-used by another piece of data. If the cell has been re-used, then the image should be discarded. Otherwise, it should be switched back to the main thread to change the image on the cell. ([source](https://www.codementor.io/mattgoldspink/ios-interview-tips-questions-answers-objective-c-du1088nfb))
 
-#### What is a protocol? How do you define your own protocol?
+#### **What is a protocol? How do you define your own protocol?**
 
 A protocol defines a list of required and optional methods for a class that adopts the protocol to implement. For a class bound protocol, any class is allowed to implement the protocol so that other classes can send message to it based on the protocol methods without knowing the exact type of class.
 
@@ -290,7 +290,7 @@ Swift protocols are different from Objective-C protocols in that Swift Protocols
 - Associated Types (Generics)
 - They can be conformed to by Structs and Enums (value types) as well as Classes (reference types).
 
-#### What is Protocol Oriented Programming?
+#### **What is Protocol Oriented Programming?**
 
 Protocol Oriented Programming is a version of Object Oriented Programming (OOP) which emphasizes composition over inheritance as a method of functionality-sharing.
 
@@ -316,11 +316,11 @@ List of differences:
 - Waterfall model best fits projects that have a clearly defined set of requirements and where change to requirements is not expect. Agile fits more for projects where the requirements are expected to change and evolve.
 - Waterfall can exhibit a project mindset that focuses on completion of the project while Agile can allow for more focus on developing a product that satisfies customers.
 
-#### What is the difference between a class and an object?
+#### **What is the difference between a class and an object?**
 
 In the simplest sense, a class is a blueprint for an object. It describes the properties and behaviors common to any particular type of object. An object, on the other hand, is an instance of a class.
 
-#### What is JSON? What are the pros and cons?
+#### **What is JSON? What are the pros and cons?**
 
 JSON stands for JavaScript Object Notation and is a common format for communicating data between different systems (principally on the internet).
 
@@ -328,7 +328,7 @@ It uses a limited number of data types in order to keep things fairly simple; th
 
 These days JSON has become a language-independent format with many programming languages and their associated libraries supporting conversions to and from this format from there own data-types.
 
-#### Decoding JSON
+#### **Decoding JSON**
 
 On the side of the Swift code in our apps, we need to implement some method of converting between the JSON data, and our locally defined objects. In the past, we might have relied on the JSONSerialization class to do this, but these days, in the Swift language, we typically will take advantage of Codable types for our data layer, and we use these with JSONEncoder and JSONDecoder classes.
 
@@ -381,7 +381,7 @@ The term “generic programming” was originally coined by David Musser and Ale
 #### **Graph** 
 
 A Graph is an important data structure in computer science; it is defined as a collection of nodes with “edges” between some of the nodes. When we talk about Graphs that category includes Trees, however not all Graphs are Trees.
-
+****
 ## Memory Management
 
 #### Why do you generally create a weak reference when using self in a block?
@@ -440,6 +440,7 @@ Calling *retain* on an object will increase its *retain* count by one. When the 
 
 When you *retain* an object, you share the same version with whoever passed the object to you. But when you *copy* an object, you do not share the same version of the object that was passed to you. Instead, a duplicate of that object is created with duplicated values.
 
+****
 #### **What is the difference between the stack vs the heap?**
 
 """
@@ -514,6 +515,8 @@ For networking in iOS programming we now a days might often use native classes f
 
 Classes we often use for networking include URLSession, and URLRequest which we use to formuale our requests.
 
+**TODO: THIS SECTION NEED A LOT MORE WORK**
+
 ****
 
 ## Objective-C
@@ -551,7 +554,7 @@ The syntax to define a block literal uses the caret symbol(^):
 #### **What is the difference between category and extension in Objective-C?**
 
 A category and extension are similar in functionality where they can add additional instance and class methods to a class. However, an extension can only do so if the source code for the class being extended is available at compile time. This means that classes such as NSString cannot be extended. Instead, a category would be used to add additional methods to the NSString class
-
+****
 ## Swift
 
 #### Theme: Access Control
@@ -612,6 +615,22 @@ println("\(x.data), \(y.data)")	// prints "42, 42"
 
 **Source:** https://developer.apple.com/swift/blog/?id=10
 
+**Why Choose a Struct over a Class in Swift?**
+
+"""
+Structs are preferable if they are relatively small and copiable because copying is a lot safer than having multiple references to the same instance as happens with classes. This is especially important when passing around a variable to many classes and/or in a multithreaded environment. If you can always send a copy of your variable to other places, you never have to worry about that other place changing the value of your variable underneath you.
+
+With Structs, there is much less need to worry about memory leaks or multiple threads racing to access/modify a single instance of a variable. (For the more technically minded, the exception to that is when capturing a struct inside a closure because then it is actually capturing a reference to the instance unless you explicitly mark it to be copied).
+
+Classes can also become bloated because a class can only inherit from a single superclass. ~~That encourages us to create huge superclasses that encompass many different abilities that are only loosely related.~~ Using protocols, especially with protocol extensions where you can provide implementations to protocols, allows you to eliminate the need for classes to achieve this sort of behavior.
+"""
+
+We can use protocol conformance with structs instead of inheritance with classes to indicate that we expect certain things from an object but without causing confusion via inheritance. 
+
+Using Structs instead of classes for the same things (where that makes sense) will tend to be **faster than classes**, in that our code will run faster (which is primarily due to the differences in how memory is used by these different types of objects).
+
+(Source: https://stackoverflow.com/questions/24232799/why-choose-struct-over-class)
+
 **Pointers**
 
 A Swift constant or variable that refers to an instance of some reference type is similar to a pointer in C, but isn’t a direct pointer to an address in memory, and doesn’t require you to write an asterisk (*) to indicate that you are creating a reference. Instead, these references are defined like any other constant or variable in Swift. You can interact with pointers directly via the Swift Standard Library, however, this isn't something we typically do except for in very specific cases, and mostly we should not need to do this.
@@ -631,7 +650,7 @@ var name = "onthecodepath" // implicit
 </details>
 
 In the first line above, the name variable is *explicitly* declared since the type of the variable follows the name of the variable. In the second line, the String type is not explicitly declared. However, Swift is able to infer that name is of a String type since the value that it is being set as is of a String type.
-
+****
 ## Thread Management
 
 #### What is the difference between synchronous and asynchronous task?
@@ -720,7 +739,7 @@ A method that RxSwift uses for memory management.
 
 // https://www.stepintoswift.com/rxswift-disposebag
 
-#### Functional Reactive Programming
+#### **Functional Reactive Programming**
 
 Functional Reactive Programming (FRP) is a Programming Paradigm for reactive programming(or asynchronous dataflow programming) through making use of the tools of functional programming (e.g. map, reduce, filter). With FRP in Swift, we have the option to use tools like RxSwift and RxCocoa to build asynchronous reactive applications which can make for easier to maintain coder and cleaner code. FRP per-se was developed by Conal Elliott from Microsoft Research, *although his definition is quite strict with most modern so-called FRP not meeting his criteria in terms of requirements for use of denotations and continuous-time.* 
 
@@ -824,12 +843,14 @@ dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
 ```
 </details>
 
+****
+
 ## Unit Testing / UI Testing
 
 #### What is the purpose of unit/UI testing? What are the benefits?
 
 Unit/UI testing are the basic of test-driven development. This development approach allows you to codify requirements for your code before you implement it. Unit tests are important to make sure that code meets its design and requirements and behaves as expected. Parts of the program are segregated and tested to ensure that individual parts are working correctly.
-
+****
 ## View / Storyboard
 
 #### What is the difference between viewDidLoad and viewDidAppear? Which should you use to load data from a remote server to display in the view?
@@ -859,6 +880,7 @@ For example, you can constrain a button so that it is horizontally centered with
 Traditionally, apps laid out their user interface by programmatically setting the frame for each view in a view hierarchy. The frame defined the view’s origin, height, and width in the superview’s coordinate system. However, whilst this could give a greater level of precise control in some cases, it involves having to manage all the elements of the layout, instead one can let auto layout do a lot of the heavy lifting for you. 
 
 Source: https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html
+
 
 # Algorithm Resources
 
