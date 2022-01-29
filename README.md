@@ -86,7 +86,7 @@ It's in fact a SQLite database API (basically a wrapper for SQLite). By setting 
 
 NSUserDefault is typically used to store small bits of data (settings, preferences, etc.). Core Data is used to store a large list of elements.
 
-#### What is a managed object context?
+#### What is a Managed Object Context?
 
 First, managed object context is an instance of NSManagedObjectContext. It is the central object in the Core Data stack. It is used to create and fetch managed objects, and to manage undo and redo operations. Although it is allowed to have multiple managed object contexts, there is typically at most one managed object to represent any given record in a persistent store.
 
@@ -201,15 +201,15 @@ L - Liskov Substitution Principle
 I - Interface Segregation Principle
 D - Dependency Inversion Principle
 
-The Single-Responsibility principle states that "A class should have one and only one reason to change, meaning that a class should have only one job".
+The **Single-Responsibility Principle** states that "A class should have one and only one reason to change, meaning that a class should have only one job".
 
-The Open-Closed Principle states that "Objects or entities should be open for extension but closed for modification".
+The **Open-Closed Principle** states that "Objects or entities should be open for extension but closed for modification".
 
-Liskov's Substitution Principle states that "Let q(x) be a property provable about objects of x of type T. Then q(y) should be provable for objects y of type S where S is a subtype of T", in general terms then this means in practice that "every subclass or derived class should be substitutable for their base or parent class".
+**Liskov's Substitution Principle** states that "Let q(x) be a property provable about objects of x of type T. Then q(y) should be provable for objects y of type S where S is a subtype of T", in general terms then this means in practice that "every subclass or derived class should be substitutable for their base or parent class".
 
-The Interface Segregation Principle states that "A client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use".
+**The Interface Segregation Principle** states that "A client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use".
 
-The Dependency Inversion Principle states that "Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions".
+**The Dependency Inversion Principle** states that "Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions".
 
 #### What is Dependency Injection and How do we Use It?
 
@@ -368,7 +368,7 @@ KVO stands for *Key-Value Observing*. It allows a controller or class to *observ
 REF: https://nalexn.github.io/kvo-guide-for-key-value-observing/
 
 
-#### Generic Programming
+#### **Generic Programming**
 
 A style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters.
 
@@ -378,7 +378,7 @@ Such software entities are known as generics in Python, Ada, C#, Delphi, Eiffel,
 
 The term “generic programming” was originally coined by David Musser and Alexander Stepanov in a more specific sense than the above, to describe a programming paradigm whereby fundamental requirements on types are abstracted from across concrete examples of algorithms and data structures and formalized as concepts, with generic functions implemented in terms of these concepts, typically using language genericity mechanisms as described above.
 
-#### Graph 
+#### **Graph** 
 
 A Graph is an important data structure in computer science; it is defined as a collection of nodes with “edges” between some of the nodes. When we talk about Graphs that category includes Trees, however not all Graphs are Trees.
 
@@ -432,7 +432,7 @@ A memory leak commonly occurs when an object is allocated in such a way that ***
 
 #### What is a retain cycle?
 
-Retain cycles can occur when memory management is based on retain count. This typically occurs when two objects strongly reference each other. As a result, the retain count of either object will never reach zero and deallocated from memory (hence retaining each other).
+Retain cycles can occur when memory management is based on retain count. This typically occurs when **two objects strongly reference each other**. As a result, the retain count of either object will never reach zero and deallocated from memory (hence retaining each other).
 
 #### What is the difference between *copy* and *retain*?
 
@@ -440,11 +440,71 @@ Calling *retain* on an object will increase its *retain* count by one. When the 
 
 When you *retain* an object, you share the same version with whoever passed the object to you. But when you *copy* an object, you do not share the same version of the object that was passed to you. Instead, a duplicate of that object is created with duplicated values.
 
-#### What is the difference between the stack vs the heap?
+#### **What is the difference between the stack vs the heap?**
 
-The stack is a region of memory where data is added or removed in a last-in-first-out (LIFO) order. According to [Ates Goral](http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap), it is the memory set aside as scratch space for a thread of execution. Meanwhile the heap is memory set aside for dynamic allocation. Unlike the stack, you can allocate a block at any time and free it at anytime.
+"""
+The stack is the memory set aside as scratch space for a thread of execution. When a function is called, a block is reserved on the top of the stack for local variables and some bookkeeping data. When that function returns, the block becomes unused and can be used the next time a function is called. The stack is always reserved in a **LIFO (last in first out) order**; the most recently reserved block is always the next block to be freed. This makes it really simple to keep track of the stack; freeing a block from the stack is nothing more than adjusting one pointer.
+
+The heap is memory set aside for dynamic allocation. Unlike the stack, there's no enforced pattern to the allocation and deallocation of blocks from the heap; you can allocate a block at any time and free it at any time. This makes it much more complex to keep track of which parts of the heap are allocated or free at any given time; there are many custom heap allocators available to tune heap performance for different usage patterns.
+
+Each thread gets a stack, while there's typically only one heap for the application (although it isn't uncommon to have multiple heaps for different types of allocation).
+
+**To what extent are they controlled by the OS or language runtime?**
+
+The OS allocates the stack for each system-level thread when the thread is created. Typically the OS is called by the language runtime to allocate the heap for the application.
+
+**What is their scope?**
+
+The stack is attached to a thread, so when the thread exits the stack is reclaimed. The heap is typically allocated at application startup by the runtime, and is reclaimed when the application (technically process) exits.
+
+**What determines the size of each of them?**
+
+The size of the stack is set when a thread is created. The size of the heap is set on application startup, but can grow as space is needed (the allocator requests more memory from the operating system).
+
+**What makes one faster?**
+
+The stack is faster because the access pattern makes it trivial to allocate and deallocate memory from it (a pointer/integer is simply incremented or decremented), while the heap has much more complex bookkeeping involved in an allocation or deallocation. Also, each byte in the stack tends to be reused very frequently which means it tends to be mapped to the processor's cache, making it very fast. Another performance hit for the heap is that the heap, being mostly a global resource, typically has to be multi-threading safe, i.e. each allocation and deallocation needs to be - typically - synchronized with "all" other heap accesses in the program.
+
+"""
+
+"""
+
+**Stack Key Points**
+
+- Stored in computer RAM just like the heap.
+- Variables created on the stack will go out of scope and are automatically deallocated.
+- Much faster to allocate in comparison to variables on the heap.
+- Implemented with an actual stack data structure.
+- Stores local data, return addresses, used for parameter passing.
+- Can have a stack overflow when too much of the stack is used (mostly from infinite or too deep recursion, very large allocations).
+- Data created on the stack can be used without pointers.
+- You would use the stack if you know exactly how much data you need to allocate before compile time and it is not too big.
+- Usually has a maximum size already determined when your program starts.
+
+**Heap Key Point**
+
+- Stored in computer RAM just like the stack.
+- Slower to allocate in comparison to variables on the stack.
+- Used on demand to allocate a block of data for use by the program.
+- Can have fragmentation when there are a lot of allocations and deallocations.
+- In C++ or C, data created on the heap will be pointed to by pointers and allocated with new or malloc respectively.
+- Can have allocation failures if too big of a buffer is requested to be allocated.
+- You would use the heap if you don't know exactly how much data you will need at run time or if you need to allocate a lot of data.
+- Responsible for memory leaks.
+
+"""
+
+**Further things to Note**
+
+"""
+While the stack is allocated by the OS when the process starts, it is maintained inline by the program. This is another reason the stack is faster, as well - push and pop operations are typically one machine instruction, and modern machines can do at least 3 of them in one cycle, whereas allocating or freeing heap involves calling into OS code.
+"""
+
+(Source: https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap)
 
 Note: In Objective-C, all objects are always allocated on the heap, or at least should be treated as if on the heap.
+
+****
 
 ## Networking
 
@@ -454,25 +514,25 @@ For networking in iOS programming we now a days might often use native classes f
 
 Classes we often use for networking include URLSession, and URLRequest which we use to formuale our requests.
 
-
+****
 
 ## Objective-C
 
-#### What is synthesize in Objective-C?
+#### **What is synthesize in Objective-C?**
 
 *Synthesize* generates getter and setter methods for your property.
 
-#### What is dynamic in Objective-C?
+#### **What is dynamic in Objective-C?**
 
 Dynamic is used for subclasses of NSManagedObject. @dynamic can also be used to delegate the responsibility of implementing the accessors. ([source](https://medium.com/ios-os-x-development/ios-interview-questions-13840247a57a))
 
-#### What is the difference between _ vs self. in Objective-C?
+#### **What is the difference between _ vs self. in Objective-C?**
 
 You typically use either when accessing a property in Objective-C. When you use _, you're referencing the actual instance variable directly. You should avoid this. Instead, you should use self. to ensure that any getter/setter actions are honored.
 
 In the case that you would write your own setter method, using _ would not call that setter method. Using self. on the property, however, would call the setter method you implemented.
 
-#### What are blocks in Objective-C?
+#### **What are blocks in Objective-C?**
 
 Blocks are a language-level feature of Objective (C and C++ too). They are objects that allow you to create distinct segments of code that can be passed around to methods or functions as if they were values. This means that a block is capable of being added to collections such as NSArray or NSDictionary. Blocks are also able to take arguments and return values similar to methods and functions.
 
@@ -488,14 +548,14 @@ The syntax to define a block literal uses the caret symbol(^):
 ```
 </details>
 
-#### What is the difference between category and extension in Objective-C?
+#### **What is the difference between category and extension in Objective-C?**
 
 A category and extension are similar in functionality where they can add additional instance and class methods to a class. However, an extension can only do so if the source code for the class being extended is available at compile time. This means that classes such as NSString cannot be extended. Instead, a category would be used to add additional methods to the NSString class
 
 ## Swift
 
 #### Theme: Access Control
-#### What is the difference between public and open? Why is it important to have both?
+#### **What is the difference between public and open? Why is it important to have both?**
 
 Open access imposes limitations on class inheritance. Classes declared with open level access can be subclassed by modules they are defined in, modules that import the module in which the class is defined, and class members as well. While this sounds similar to the public access level defined in Swift 2, there is a small difference. In Swift 3, the meaning of public access level means that classes declared public can only be subclassed in the module they are defined in. This includes public class members which can be overridden by subclasses defined int he module they are defined in.
 
@@ -520,13 +580,44 @@ Private access restricts the use of an entity **to the enclosing declaration**, 
 
 The main difference to note is that structs are value types (stored on stack) while classes are reference types (stored on heap).
 
+We can say that a value of value type is the actual value, in contrast, a value of reference type is a reference to another value.
+
+In Swift value types include structures (including booleans, characters, integer numbers, floating-point numbers, fixed-point numbers, mutable strings, tuples, mutable arrays, mutable dictionaries, mutable sets), enumerations (including optionals), and user-defined structures and enumerations composing other value types.	
+Reference types include: functions, closures, and classes.
+
 Classes have capabilities that structs do not:
-- Inheritance enables one class to inherit the characteristics of another. ([source](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html))
+- Inheritance enables one class to inherit the characteristics of another. 
 - Type casting enables you to check and interpret the type of a class instance at runtime.
 - Deinitializers enable an instance of a class to free up any resources it has assigned.
 - Reference counting allows more than one reference to a class instance.
 
-#### What is the difference between implicit and explicit?
+#### *Example*
+For value types, copying creates an independent instance with its own unique copy of its data (in a seperate slot or location in stack memory):
+```
+// Value``` type example
+struct S { var data: Int = -1 }
+var a = S()
+var b = a						// a is copied to b
+a.data = 42						// Changes a, not b
+println("\(a.data), \(b.data)")	// prints "42, -1"
+```
+Conversely, copying a reference type implicitly creates a shared instance (or really multiple references to the same object in heap memory). After a copy, two variables then refer to a single instance of the data, so modifying data in the second variable also affects the original for example:
+``` swift
+class C { var data: Int = -1 }
+var x = C()
+var y = x						// x is copied to y
+x.data = 42						// changes the instance referred to by x (and y)
+println("\(x.data), \(y.data)")	// prints "42, 42"
+```
+
+**Source:** https://developer.apple.com/swift/blog/?id=10
+
+**Pointers**
+
+A Swift constant or variable that refers to an instance of some reference type is similar to a pointer in C, but isn’t a direct pointer to an address in memory, and doesn’t require you to write an asterisk (*) to indicate that you are creating a reference. Instead, these references are defined like any other constant or variable in Swift. You can interact with pointers directly via the Swift Standard Library, however, this isn't something we typically do except for in very specific cases, and mostly we should not need to do this.
+
+****
+#### **What is the difference between implicit and explicit?**
 
 When referring to something as implicit or explicit, it is often referring to how an object is declared. In the two examples below:
 
@@ -791,12 +882,4 @@ If you open an issue, I would be happy to go ahead and add the question with the
 
 - onthecodePath
 - Sergtsaeb
-
-
-
-
-
-
-
-
-
+- StephenClarkApps
