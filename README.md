@@ -596,7 +596,7 @@ Classes have capabilities that structs do not:
 
 #### *Example*
 For value types, copying creates an independent instance with its own unique copy of its data (in a seperate slot or location in stack memory):
-```
+``` swift
 // Value``` type example
 struct S { var data: Int = -1 }
 var a = S()
