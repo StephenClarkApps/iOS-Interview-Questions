@@ -783,7 +783,6 @@ Tasks executed *serially* are executed one at a time while tasks that are execut
 ****
 ### Spot the bug that occurs in the code:
 
-<details open>
 <summary>Swift</summary>
 
 ```swift
@@ -802,9 +801,7 @@ class ViewController: UIViewController {
     }
 }
 ```
-</details>
 
-<details>
 <summary>Objective-C</summary>
 
 ```objective-c
@@ -828,13 +825,11 @@ class ViewController: UIViewController {
   );
 }
 ```
-</details>
+
 <br>
 
 All UI updates must be performed on the main thread. Global dispatch queues do not make any guarantees so code should be modified to run the UI update on the main thread. Here is the fix below:
 
-
-<details open>
 <summary>Swift</summary>
 
 ```swift
@@ -845,9 +840,7 @@ DispatchQueue.global(qos: .default).async {
     }
 }
 ```
-</details>
 
-<details>
 <summary>Objective-C</summary>
 
 ```objective-c
@@ -861,7 +854,6 @@ dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
 });
 
 ```
-</details>
 
 Sometimes, this type of thread swithcing issues can cause problems, it's not always clear why. You may want to check whether your already on the main thread before 
 
