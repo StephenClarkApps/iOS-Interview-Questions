@@ -850,7 +850,7 @@ DispatchQueue.global(qos: .default).async {
 <details>
 <summary>Objective-C</summary>
 
-```
+```objective-c
 dispatch_async(
 dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
 ^{
@@ -862,6 +862,41 @@ dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
 
 ```
 </details>
+
+Sometimes, this type of thread swithcing issues can cause problems, it's not always clear why. You may want to check whether your already on the main thread before 
+
+```objective-c
+#import <Foundation/Foundation.h>
+
+@implementation NSObject (SomeSetOfExtensions)
+
+-(void)runOnMainQueueWithoutDeadlocking:(void (^)(void))block
+{
+    if ([NSThread isMainThread]) {
+        block();
+    } else {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
+}
+
+@end
+```
+
+```swift
+public extension UIView {
+    // MARK:- Threading
+    
+    /// Run a block of code on the main thread and switch to main if on another thread
+    class func runOnMainThread(block: () -> ()) {
+        if Thread.isMainThread {
+            block()
+            return
+        }
+        DispatchQueue.main.sync {
+            block()
+        }
+    }
+```
 
 ****
 
