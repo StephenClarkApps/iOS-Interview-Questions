@@ -274,7 +274,9 @@ An example of how a protocol is defined:
 - (NSString *)titleForRecordAtIndex:(NSUInteger)index;
 @end
 ```
+</details>
 
+<details open>
 <summary>Swift</summary>
 
 ```swift
@@ -282,6 +284,8 @@ protocol myProtocol {
     // Definition goes here
 }
 ```
+</details>
+
 Swift protocols are different from Objective-C protocols in that Swift Protocols support:
 
 - Protocol Inheritance
@@ -298,7 +302,7 @@ Protocol Oriented Programming is a version of Object Oriented Programming (OOP) 
 A common instance protocols are used is providing a DataSource for UITableView or UICollectionView ([source](https://www.codementor.io/mattgoldspink/ios-interview-tips-questions-answers-objective-c-du1088nfb))
 </summary>
 
-</details>
+
 
  
 #### What a Waterfall methodology and an Agile methodology? What are the differences between them?
