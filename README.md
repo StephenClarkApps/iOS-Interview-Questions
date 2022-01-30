@@ -270,7 +270,6 @@ A protocol defines a blueprint of methods, properties, and other requirements th
 
 An example of how a protocol is defined:
 
-<details open>
 <summary>Objective-C</summary>
 
 ```objective-c
@@ -281,9 +280,7 @@ An example of how a protocol is defined:
 - (NSString *)titleForRecordAtIndex:(NSUInteger)index;
 @end
 ```
-</details>
 
-<details open>
 <summary>Swift</summary>
 
 ```swift
@@ -291,7 +288,6 @@ protocol myProtocol {
     // Definition goes here
 }
 ```
-</details>
 
 Swift protocols are different from Objective-C protocols in that Swift Protocols support:
 
@@ -401,7 +397,7 @@ Sometimes it is necessary it capture self in a block such as when defining a cal
 
 Instead, capturing a weak reference to self is recommended in order to avoid this issue:
 
-<details open>
+
 <summary>Objective-C</summary>
 
 ```objective-c
@@ -420,7 +416,6 @@ resource.request().onComplete { [weak self] response in
  }
 ```
     
-</details>
 
 ****
 ### What is Memory Management handled on iOS?
@@ -561,7 +556,6 @@ Blocks are a language-level feature of Objective (C and C++ too). They are objec
 
 The syntax to define a block literal uses the caret symbol(^):
 
-<details open>
 <summary>Objective-C</summary>
 
 ```objective-c
@@ -569,7 +563,6 @@ The syntax to define a block literal uses the caret symbol(^):
   NSLog(@"This is an example of a block")
 }
 ```
-</details>
 ****
 ### **What is the difference between category and extension in Objective-C?**
 
@@ -660,14 +653,14 @@ A Swift constant or variable that refers to an instance of some reference type i
 
 When referring to something as implicit or explicit, it is often referring to how an object is declared. In the two examples below:
 
-<details open>
+
 <summary>Swift</summary>
 
 ```swift
 var name: String = "onthecodepath" // explicit
 var name = "onthecodepath" // implicit
 ```
-</details>
+
 
 In the first line above, the name variable is *explicitly* declared since the type of the variable follows the name of the variable. In the second line, the String type is not explicitly declared. However, Swift is able to infer that name is of a String type since the value that it is being set as is of a String type.
 ****
