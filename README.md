@@ -387,7 +387,8 @@ This approach, pioneered by the ML programming language in 1973, permits writing
 Such software entities are known as generics in Python, Ada, C#, Delphi, Eiffel, F#, Java, Nim, Rust, Swift, TypeScript and Visual Basic .NET. They are known as parametric polymorphism in ML, Scala, Julia, and Haskell (the Haskell community also uses the term “generic” for a related but somewhat different concept); templates in C++ and D; and parameterized types in the influential 1994 book Design Patterns.
 
 The term “generic programming” was originally coined by David Musser and Alexander Stepanov in a more specific sense than the above, to describe a programming paradigm whereby fundamental requirements on types are abstracted from across concrete examples of algorithms and data structures and formalized as concepts, with generic functions implemented in terms of these concepts, typically using language genericity mechanisms as described above.
-
+****
+#### TOPIC AREA: Data Types / Data Structures
 ### **Graph** 
 
 A Graph is an important data structure in computer science; it is defined as a collection of nodes with “edges” between some of the nodes. When we talk about Graphs that category includes Trees, however not all Graphs are Trees.
@@ -409,13 +410,22 @@ SomeBlock* __weak weakSelf = self;
 
 <summary>Swift</summary>
 In Swift, to deal with what ARC (automatic reference counting) has given us, we can similarly use code like this with our "closures":
-...
+```swift
+// To avoid retain cycles in closures we can make use of the "Capture List"
+// as in the below example. 
+resource.request().onComplete { [weak self] response in
+    guard let strongSelf = self else { return } // or guard let `self` = self else { return }
+    let modal = strongSelf.updateModel(response)
+    strongSelf.updateUI(model)
+ }
+```
+    
 </details>
 
 ****
 ### What is Memory Management handled on iOS?
 
-iOS uses something called ARC which stands for Automatic Reference Counting. When an object is said to have a strong reference to it, ARC increase its retain count by 1. When the retain count of an object reaches 0, the object will typically be deallocated if there are no more strong references to it. Unlike garbage collection, ARC does not handle reference cycles automatically. Before ARC we had to deallocate manually, however the work of Chris Latner and other brough the automatic method to both Objective-C and Swift.
+iOS uses something called **ARC** which stands for **Automatic Reference Counting**. When an object is said to have a strong reference to it, ARC increase its retain count by 1. When the retain count of an object reaches 0, the object will typically be deallocated if there are no more strong references to it. Unlike garbage collection, ARC does not handle reference cycles automatically. Before ARC we had to deallocate manually, however the work of Chris Latner and other brough the automatic method to both Objective-C and Swift.
 ****
 ### What is the difference between *weak* and *strong*?
 
@@ -436,11 +446,11 @@ Common instances of *weak* references are delegate properties and subview/contro
 ([source](https://krakendev.io/blog/weak-and-unowned-references-in-swift))
 
 ****
-### What is a memory leak?
+### What is a Memory Leak?
 
 A memory leak commonly occurs when an object is allocated in such a way that ***when it is no longer in use or needed, it is not released***. In iOS programming, you create certain objects with weak references in order to avoid a strong to strong relationship that creates a retain cycle and a memory leak.
 ****
-### What is a retain cycle?
+### What is a Retain Cycle?
 
 Retain cycles can occur when memory management is based on retain count. This typically occurs when **two objects strongly reference each other**. As a result, the retain count of either object will never reach zero and deallocated from memory (hence retaining each other).
 ****
@@ -451,7 +461,7 @@ Calling *retain* on an object will increase its *retain* count by one. When the 
 When you *retain* an object, you share the same version with whoever passed the object to you. But when you *copy* an object, you do not share the same version of the object that was passed to you. Instead, a duplicate of that object is created with duplicated values.
 
 ****
-### **What is the difference between the stack vs the heap?**
+### **What is the Difference between the Stack vs the Heap?**
 
 """
 The stack is the memory set aside as scratch space for a thread of execution. When a function is called, a block is reserved on the top of the stack for local variables and some bookkeeping data. When that function returns, the block becomes unused and can be used the next time a function is called. The stack is always reserved in a **LIFO (last in first out) order**; the most recently reserved block is always the next block to be freed. This makes it really simple to keep track of the stack; freeing a block from the stack is nothing more than adjusting one pointer.
