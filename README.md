@@ -76,31 +76,31 @@ Use the Table of Contents to practice and test your knowledge. It doesn't show t
 
 ## Database
 
-#### What is Core Data?
+### What is Core Data?
 
 Core Data is a framework that is used to manage model layer objects. It has the ability to persist object graphs to a persistent store. Data is organized into relational entity-attribute model.
 
 It's in fact a SQLite database API (basically a wrapper for SQLite). By setting up CoreData properly, an application can store and retrieve the internal state of a class rapidly. The CoreData stack implementation has changed several times over the course of time and can now incorporate cloud storage (optionally). We might actually choose to use something simpler like a simple SQLite implementation using something like FMDB if we wanna have something cleaner and where we have no intention of incorporating cloud storage with Core Data.
 ****
-#### When would you use Core Data over NSUserDefault?
+### When would you use Core Data over NSUserDefault?
 
 NSUserDefault is typically used to store small bits of data (settings, preferences, etc.). Core Data is used to store a large list of elements.
 ****
-#### What is a Managed Object Context?
+### What is a Managed Object Context?
 
 First, managed object context is an instance of NSManagedObjectContext. It is the central object in the Core Data stack. It is used to create and fetch managed objects, and to manage undo and redo operations. Although it is allowed to have multiple managed object contexts, there is typically at most one managed object to represent any given record in a persistent store.
 ****
-#### What is NSFetchRequest?
+### What is NSFetchRequest?
 
 NSFetchRequest is the class responsible for fetching from Core Data. Fetch requests can be used to fetch a set of objects meeting a certain criteria, individual values and more. ([source](https://medium.com/ios-os-x-development/50-ios-interview-questions-and-answers-part-2-45f952230b9f))
 ****
-#### Is Core Data type safe?
+### Is Core Data type safe?
 
 Core Data is not typesafe, whilst one may use different queues with Core Data, "Core Data expects to be run on a single thread." 
 
 However, there are a range of solutions and methods including cocoapods which look to deal with the posibility of issues caused by the above.
 ****
-#### Using Core Data with SwiftUI
+### Using Core Data with SwiftUI
 
 *Here we can only breifly touch on this, see the links for full understanding.*
 
@@ -120,7 +120,7 @@ Provides sample code in ContentView to create, read, and delete example data.
 That provides for us the complete ability to use Core Data fetch requests from within SwiftUI.
 """
 
-#### Using CoreData with SwiftUI -> @FetchRequest
+### Using CoreData with SwiftUI -> @FetchRequest
 
 """
 Once your managed object context is attached to the environment under the .managedObjectContext key, you can use the @FetchRequest property wrapper to make properties in your views that create and manage Core Data fetch requests automatically.
@@ -132,7 +132,7 @@ Creating a fetch request requires two pieces of information: the entity you want
 
 Source: https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-core-data-fetch-request-using-fetchrequest
 ****
-#### What is FMDB? and What is SQLite?
+### What is FMDB? and What is SQLite?
 
 FMDB is a wrapper for SQLite which is widely used in iOS development.
 
@@ -140,7 +140,7 @@ SQLite is light weight version of SQL which is commonly used to store data in ou
 ****
 ## Debugging
 
-#### What are some ways of debugging in iOS?
+### What are some ways of debugging in iOS?
 
 - NSLog and print functions can be used for output into console.
 - Breakpoints can also be used together with the Debug bar and Variables view as an alternative.
@@ -148,15 +148,15 @@ SQLite is light weight version of SQL which is commonly used to store data in ou
 ****
 ## Design Patterns
 
-#### What is Singleton Pattern?
+### What is Singleton Pattern?
 
 The Singleton design pattern ensures that only one instance exists for a given class and that there’s a global access point to that instance. It usually uses lazy loading to create the single instance when it’s needed the first time. ([source](https://medium.com/ios-os-x-development/ios-interview-questions-13840247a57a))
 ****
-#### What is the delegation pattern?
+### What is the delegation pattern?
 
 The delegation pattern is a powerful pattern used in building iOS applications. The basic idea is that one object will act on another object's behalf or in coordination with another object. The delegating object typically keeps a reference to the other object (delegate) and sends a message to it at the appropriate time. It is important to note that they have a one to one relationship.
 ****
-#### What is MVC?
+### What is MVC?
 
 MVC stands for **Model-View-Controller**. It is a software architecture pattern for implementing user interfaces.
 
@@ -165,7 +165,7 @@ MVC consists of three layers: the model, the view, and the controller.
 - The **view layer** is typically where all the UI interface lies. Things like displaying buttons and numbers belong in the view layer. The view layer does not know anything about the model layer and vice versa.
 - The **controller (view controller)** is the layer that integrates the view layer and the model layer together.
 ****
-#### What is MVVM?
+### What is MVVM?
 
 MVVM stands for **Model-View-ViewModel**. It is a software architecture pattern for implementing user interfaces.
 
@@ -175,19 +175,19 @@ A common occurence in MVC is where you have a massive-view-controller (some joke
 ****
 ###  What is the Coordinator Pattern?
 
-#### The Coordinator Pattern
+### The Coordinator Pattern
 The Coordinator Pattern is a Structural / Architectural Design Pattern that defines how we deal with screen flow, and navigation in our apps.
 
 The Coordinator pattern attempts to address issues with the MVC and MVVM patterns, which, in iOS, can cause our View Controllers to be dependent on each other and prevent effective View Controller re-use.
 
-##### Back Story of the Pattern
+#### Back Story of the Pattern
 The Coordinator pattern is a design pattern originally proposed by Soroush Khanlou in published articles and at a presentation at an iOS development back around 2014.
 
-##### Implementing the Pattern
+#### Implementing the Pattern
 
 Implemting the Coordinator Pattern in iOS (either in Swift or Objectieve-C) starts with defining a simple protocol.
 
-#### What is MVVM-C ?
+### What is MVVM-C ?
 
 This is an approach combining MVVM with the Coordinator Pattern, and it may or may not make use of an Rx or Reactive binding between your View Models and your Views..
 
@@ -197,10 +197,15 @@ This is an approach combining MVVM with the Coordinator Pattern, and it may or m
 SOLID stands for:
 
 S - Single-responsiblity Principle
+
 O - Open-closed Principle
+
 L - Liskov Substitution Principle
+
 I - Interface Segregation Principle
+
 D - Dependency Inversion Principle
+
 ****
 The **Single-Responsibility Principle** states that "A class should have one and only one reason to change, meaning that a class should have only one job".
 ****
@@ -212,7 +217,7 @@ The **Open-Closed Principle** states that "Objects or entities should be open fo
 ****
 **The Dependency Inversion Principle** states that "Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions".
 ****
-#### What is Dependency Injection and How do we Use It?
+### What is Dependency Injection and How do we Use It?
 
 Dependency Injection – is a technique whereby one object (or static method) supplies the dependencies of another object. A dependency is an object that can be used (a service). An injection is the passing of a dependency to a dependent object (a client) that would use it (source: Wikipedia).
 
@@ -233,7 +238,7 @@ let holidatyDestinationViewController = DestinationViewController(destination: d
 // Then we present with our custom presentation logic
  ```
  ****
-#### What about the Principle of Dependency Inversion?
+### What about the Principle of Dependency Inversion?
 
 One of the SOLID design principles (https://en.wikipedia.org/wiki/SOLID)...
 
@@ -251,13 +256,13 @@ https://medium.com/flawless-app-stories/practical-dependency-inversion-in-swift-
 ****
 ## General / Uncategorized
 
-#### **What considerations do you need when writing a UITableViewController which shows images downloaded from a remote server?**
+### **What considerations do you need when writing a UITableViewController which shows images downloaded from a remote server?**
 
 - Only download the image when the cell is scrolled into view (when cellForRowAtIndexPath is called)
 - Download the image asynchronously on a background thread so as not to block the UI so the user can keep scrolling
 - When the image has downloaded for a cell, check if that cell is still in the view or whether it has been re-used by another piece of data. If the cell has been re-used, then the image should be discarded. Otherwise, it should be switched back to the main thread to change the image on the cell. ([source](https://www.codementor.io/mattgoldspink/ios-interview-tips-questions-answers-objective-c-du1088nfb))
-
-#### **What is a protocol? How do you define your own protocol?**
+****
+### **What is a protocol? How do you define your own protocol?**
 
 A protocol defines a list of required and optional methods for a class that adopts the protocol to implement. For a class bound protocol, any class is allowed to implement the protocol so that other classes can send message to it based on the protocol methods without knowing the exact type of class.
 
@@ -295,8 +300,8 @@ Swift protocols are different from Objective-C protocols in that Swift Protocols
 - Default Implementation
 - Associated Types (Generics)
 - They can be conformed to by Structs and Enums (value types) as well as Classes (reference types).
-
-#### **What is Protocol Oriented Programming?**
+****
+### **What is Protocol Oriented Programming?**
 
 Protocol Oriented Programming is a version of Object Oriented Programming (OOP) which emphasizes composition over inheritance as a method of functionality-sharing.
 
@@ -306,7 +311,7 @@ A common instance protocols are used is providing a DataSource for UITableView o
 
 ***
 #### TOPIC AREA: Development Lifecycle
-#### What is the Waterfall methodology and what is an Agile methodology? What are the differences between them?
+### What is the Waterfall methodology and what is an Agile methodology? What are the differences between them?
 
 Waterfall methodology is a sequential model for software development. It is separated into a sequence of pre-defined phases including feasibility, planning, design, build, test, production, and support.
 
@@ -321,11 +326,11 @@ List of differences:
 - Waterfall model best fits projects that have a clearly defined set of requirements and where change to requirements is not expect. Agile fits more for projects where the requirements are expected to change and evolve.
 - Waterfall can exhibit a project mindset that focuses on completion of the project while Agile can allow for more focus on developing a product that satisfies customers.
 ****
-#### **What is the difference between a class and an object?**
+### **What is the difference between a class and an object?**
 
 In the simplest sense, a class is a blueprint for an object. It describes the properties and behaviors common to any particular type of object. An object, on the other hand, is an instance of a class.
 ****
-#### **What is JSON? What are the pros and cons?**
+### **What is JSON? What are the pros and cons?**
 
 JSON stands for JavaScript Object Notation and is a common format for communicating data between different systems (principally on the internet).
 
@@ -333,11 +338,11 @@ It uses a limited number of data types in order to keep things fairly simple; th
 
 These days JSON has become a language-independent format with many programming languages and their associated libraries supporting conversions to and from this format from there own data-types.
 
-#### **Decoding JSON**
+### **Decoding JSON**
 
 On the side of the Swift code in our apps, we need to implement some method of converting between the JSON data, and our locally defined objects. In the past, we might have relied on the JSONSerialization class to do this, but these days, in the Swift language, we typically will take advantage of Codable types for our data layer, and we use these with JSONEncoder and JSONDecoder classes.
 
-#### The Pros and Cons of Json
+### The Pros and Cons of Json
 
 #### Pros:
 
@@ -350,7 +355,7 @@ On the side of the Swift code in our apps, we need to implement some method of c
 - Data is not readily streamable and has to be broken up into individual objects
 - Can't use comments
 ****
-#### What is the difference between not-running, inactive, active, background and suspended execution states?
+### What is the difference between not-running, inactive, active, background and suspended execution states?
 
 - **Not-running state** occurs when the app either has not be launched or was running but was terminated by the system.
 - **Inactive state** occurs where the app runs in the foreground but is currently not receiving events. (It may be executing other code though). This state is typically brief as apps transitions to other states.
@@ -358,11 +363,11 @@ On the side of the Swift code in our apps, we need to implement some method of c
 - **Background state** occurs when the app is in the background and executing code. Apps typically enter this state on their way to being suspended. Apps that require extra execution time may remain in this screen longer. Apps being launched directly into the background enters this state instead of inactive state.
 - **Suspended state** is where the app is in the background but it is not executing code. Apps will remain in memory, but are removed by the system if low-memory condition occurs in order to make more space for foreground apps.
 ****
-#### Is it faster to iterate through an NSArray or an NSSet?
+### Is it faster to iterate through an NSArray or an NSSet?
 
 It depends. NSSet is faster to iterate through if the order of the items in the collection is not important. The reason is because NSSet uses hash values in order to find items while NSArray has to iterate through its entire contents to find a particular object. ([source - #25](https://medium.com/cocoaacademymag/25-ios-interview-questions-and-answers-for-junior-developers-19bfe6e99b0))
 ****
-#### What is KVO?
+### What is KVO?
 
 KVO stands for *Key-Value Observing*. It allows a controller or class to *observe* when a property value changes.
 
@@ -373,7 +378,7 @@ KVO stands for *Key-Value Observing*. It allows a controller or class to *observ
 REF: https://nalexn.github.io/kvo-guide-for-key-value-observing/
 
 ****
-#### **Generic Programming**
+### **Generic Programming**
 
 A style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters.
 
@@ -383,13 +388,13 @@ Such software entities are known as generics in Python, Ada, C#, Delphi, Eiffel,
 
 The term “generic programming” was originally coined by David Musser and Alexander Stepanov in a more specific sense than the above, to describe a programming paradigm whereby fundamental requirements on types are abstracted from across concrete examples of algorithms and data structures and formalized as concepts, with generic functions implemented in terms of these concepts, typically using language genericity mechanisms as described above.
 
-#### **Graph** 
+### **Graph** 
 
 A Graph is an important data structure in computer science; it is defined as a collection of nodes with “edges” between some of the nodes. When we talk about Graphs that category includes Trees, however not all Graphs are Trees.
 ****
 ## Memory Management
 
-#### Why do you generally create a weak reference when using self in a block?
+### Why do you generally create a weak reference when using self in a block?
 
 Sometimes it is necessary it capture self in a block such as when defining a callback block. However, since blocks maintain strong references to any captured objects including self, this may lead to a strong reference cycle and memory leak.
 
@@ -408,11 +413,11 @@ In Swift, to deal with what ARC (automatic reference counting) has given us, we 
 </details>
 
 ****
-#### What is Memory Management handled on iOS?
+### What is Memory Management handled on iOS?
 
 iOS uses something called ARC which stands for Automatic Reference Counting. When an object is said to have a strong reference to it, ARC increase its retain count by 1. When the retain count of an object reaches 0, the object will typically be deallocated if there are no more strong references to it. Unlike garbage collection, ARC does not handle reference cycles automatically. Before ARC we had to deallocate manually, however the work of Chris Latner and other brough the automatic method to both Objective-C and Swift.
 ****
-#### What is the difference between *weak* and *strong*?
+### What is the difference between *weak* and *strong*?
 
 First, objects are *strong* by default.
 
@@ -431,22 +436,22 @@ Common instances of *weak* references are delegate properties and subview/contro
 ([source](https://krakendev.io/blog/weak-and-unowned-references-in-swift))
 
 ****
-#### What is a memory leak?
+### What is a memory leak?
 
 A memory leak commonly occurs when an object is allocated in such a way that ***when it is no longer in use or needed, it is not released***. In iOS programming, you create certain objects with weak references in order to avoid a strong to strong relationship that creates a retain cycle and a memory leak.
 ****
-#### What is a retain cycle?
+### What is a retain cycle?
 
 Retain cycles can occur when memory management is based on retain count. This typically occurs when **two objects strongly reference each other**. As a result, the retain count of either object will never reach zero and deallocated from memory (hence retaining each other).
 ****
-#### What is the difference between *copy* and *retain*?
+### What is the difference between *copy* and *retain*?
 
 Calling *retain* on an object will increase its *retain* count by one. When the *retain* count of an objective reaches 0, the object will be deallocated and released from memory.
 
 When you *retain* an object, you share the same version with whoever passed the object to you. But when you *copy* an object, you do not share the same version of the object that was passed to you. Instead, a duplicate of that object is created with duplicated values.
 
 ****
-#### **What is the difference between the stack vs the heap?**
+### **What is the difference between the stack vs the heap?**
 
 """
 The stack is the memory set aside as scratch space for a thread of execution. When a function is called, a block is reserved on the top of the stack for local variables and some bookkeeping data. When that function returns, the block becomes unused and can be used the next time a function is called. The stack is always reserved in a **LIFO (last in first out) order**; the most recently reserved block is always the next block to be freed. This makes it really simple to keep track of the stack; freeing a block from the stack is nothing more than adjusting one pointer.
@@ -516,7 +521,7 @@ Note: In Objective-C, all objects are always allocated on the heap, or at least 
 
 For networking in iOS programming we now a days might often use native classes from  core Cocoa, yet in the past it was more common to use third-party libraries such as alamofire.
 
-#### Using URLRequest and URLSession
+### Using URLRequest and URLSession
 
 Classes we often use for networking include URLSession, and URLRequest which we use to formuale our requests.
 
@@ -526,21 +531,21 @@ Classes we often use for networking include URLSession, and URLRequest which we 
 
 ## Objective-C
 
-#### **What is synthesize in Objective-C?**
+### **What is synthesize in Objective-C?**
 
 *Synthesize* generates getter and setter methods for your property.
 ****
-#### **What is dynamic in Objective-C?**
+### **What is dynamic in Objective-C?**
 
 Dynamic is used for subclasses of NSManagedObject. @dynamic can also be used to delegate the responsibility of implementing the accessors. ([source](https://medium.com/ios-os-x-development/ios-interview-questions-13840247a57a))
 ****
-#### **What is the difference between _ vs self. in Objective-C?**
+### **What is the difference between _ vs self. in Objective-C?**
 
 You typically use either when accessing a property in Objective-C. When you use _, you're referencing the actual instance variable directly. You should avoid this. Instead, you should use self. to ensure that any getter/setter actions are honored.
 
 In the case that you would write your own setter method, using _ would not call that setter method. Using self. on the property, however, would call the setter method you implemented.
 ****
-#### **What are blocks in Objective-C?**
+### **What are blocks in Objective-C?**
 
 Blocks are a language-level feature of Objective (C and C++ too). They are objects that allow you to create distinct segments of code that can be passed around to methods or functions as if they were values. This means that a block is capable of being added to collections such as NSArray or NSDictionary. Blocks are also able to take arguments and return values similar to methods and functions.
 
@@ -556,14 +561,14 @@ The syntax to define a block literal uses the caret symbol(^):
 ```
 </details>
 ****
-#### **What is the difference between category and extension in Objective-C?**
+### **What is the difference between category and extension in Objective-C?**
 
 A category and extension are similar in functionality where they can add additional instance and class methods to a class. However, an extension can only do so if the source code for the class being extended is available at compile time. This means that classes such as NSString cannot be extended. Instead, a category would be used to add additional methods to the NSString class
 ****
 ## Swift
 
 #### Theme: Access Control
-#### **What is the difference between public and open? Why is it important to have both?**
+### **What is the difference between public and open? Why is it important to have both?**
 
 Open access imposes limitations on class inheritance. Classes declared with open level access can be subclassed by modules they are defined in, modules that import the module in which the class is defined, and class members as well. While this sounds similar to the public access level defined in Swift 2, there is a small difference. In Swift 3, the meaning of public access level means that classes declared public can only be subclassed in the module they are defined in. This includes public class members which can be overridden by subclasses defined int he module they are defined in.
 
@@ -580,11 +585,11 @@ Private access restricts the use of an entity **to the enclosing declaration**, 
 **Source:** https://docs.swift.org/swift-book/LanguageGuide/AccessControl.html
 **Source:** https://www.appcoda.com/swift-access-levels/
 ****
-#### What is the difference between *var* and *let*?
+### What is the difference between *var* and *let*?
 
 *var* is a variable that can be changed while *let* denotes a constant that cannot be changed once set.
 ****
-#### What is the difference between a struct and a class?
+### What is the difference between a struct and a class?
 
 The main difference to note is that structs are value types (stored on stack) while classes are reference types (stored on heap).
 
@@ -620,7 +625,7 @@ println("\(x.data), \(y.data)")	// prints "42, 42"
 
 **Source:** https://developer.apple.com/swift/blog/?id=10
 ****
-**Why Choose a Struct over a Class in Swift?**
+###**Why Choose a Struct over a Class in Swift?**
 
 """
 Structs are preferable if they are relatively small and copiable because copying is a lot safer than having multiple references to the same instance as happens with classes. This is especially important when passing around a variable to many classes and/or in a multithreaded environment. If you can always send a copy of your variable to other places, you never have to worry about that other place changing the value of your variable underneath you.
@@ -641,7 +646,7 @@ Using Structs instead of classes for the same things (where that makes sense) wi
 A Swift constant or variable that refers to an instance of some reference type is similar to a pointer in C, but isn’t a direct pointer to an address in memory, and doesn’t require you to write an asterisk (*) to indicate that you are creating a reference. Instead, these references are defined like any other constant or variable in Swift. You can interact with pointers directly via the Swift Standard Library, however, this isn't something we typically do except for in very specific cases, and mostly we should not need to do this.
 
 ****
-#### **What is the difference between implicit and explicit?**
+### **What is the difference between implicit and explicit?**
 
 When referring to something as implicit or explicit, it is often referring to how an object is declared. In the two examples below:
 
@@ -658,11 +663,11 @@ In the first line above, the name variable is *explicitly* declared since the ty
 ****
 ## Thread Management
 
-#### What is the difference between synchronous and asynchronous task?
+### What is the difference between synchronous and asynchronous task?
 
 Synchronous tasks wait until the task has been completed while asynchronous tasks can run in the background and send a notification when the task is complete.
 
-#### What is the difference between *atomic* and *non-atomic* synthesized properties?
+### What is the difference between *atomic* and *non-atomic* synthesized properties?
 
 First, properties are set to *atomic* by default.
 
@@ -670,7 +675,7 @@ First, properties are set to *atomic* by default.
 
 *Non-atomic* properties, however are not thread-safe. While they run faster, they may cause race conditions. In the event that accessor methods are called simultaneously and a race condition occurs, a setter value would first release the old value and a getter method would retrieve nil since no value has not been set yet.
 ****
-#### What is GCD and how is it used?
+### What is GCD and how is it used?
 
 GCD stands for Grand Central Dispatch, it provides and manages Queues of tasks in the iOS apps, it offers the following benefits
 - Improving your app's responsiveness by helping to defer computationally expensive tasks and run them in the background.
@@ -685,7 +690,7 @@ In the past we had to work directly with “threads” and work with trying to r
 
 Because GCD is block/closure based, things can start to get convoluted when we get into more complex scenarios leading to what is known as “callback hell” (meaning scenarios wherein the completion handler of one method you might them be doing another async call and so on). One solution to prevent callback hell is to use something called PromiseKit which is a swift implementation of “Promises” letting you chain your asynchronous work such that if you have two or three operations that you wanted to run but which depend on the result of previous operations without nesting blocks or anything like that. “Promises tame asynchronicity by letting you write code as a series of actions based on events“(https://www.raywenderlich.com/9208-getting-started-with-promisekit).
 ****
-#### RxSwift
+### RxSwift
 
 RxSwift is a Swift framework and is also an example of an implementation of Reactive Programming based on the ReactiveX Standard first developed in Microsoft in implementations such as rx.NET – this standard is essentially a standard for libraries which can be used across a range of different programming languages which are all used for *composing asynchronous and event-based programs by making use of Observable Sequences*. The ReactiveX Standard “extends the observer pattern to support sequences of data and/or events and adds operators that allow you to compose sequences together declaratively while abstracting away concerns about things like low-level threading, synchronization, thread-safety, concurrent data structures, and non-blocking I/O.” 
 
@@ -744,13 +749,13 @@ A method that RxSwift uses for memory management.
 
 // https://www.stepintoswift.com/rxswift-disposebag
 ****
-#### **Functional Reactive Programming**
+### **Functional Reactive Programming**
 
 Functional Reactive Programming (FRP) is a Programming Paradigm for reactive programming(or asynchronous dataflow programming) through making use of the tools of functional programming (e.g. map, reduce, filter). With FRP in Swift, we have the option to use tools like RxSwift and RxCocoa to build asynchronous reactive applications which can make for easier to maintain coder and cleaner code. FRP per-se was developed by Conal Elliott from Microsoft Research, *although his definition is quite strict with most modern so-called FRP not meeting his criteria in terms of requirements for use of denotations and continuous-time.* 
 
 More loosely defined however Functional Reactive Programming is a programming paradigm which can be defined by the combination of the two concepts of Reactive Programming which focuses on asynchronous data streams which you can listen to and react to accordingly, and secondly Functional Programming, which emphasizes calculations via mathematical-style functions, immutability and expressiveness, and minimizes the use of variables and state.
 ****
-#### The Swift Combine Framework
+### The Swift Combine Framework
 
 The Swift team have now come up with what is essentially there own take on RxSwift which is called the `Combine` framwork.
 
@@ -762,11 +767,11 @@ At the end of a chain of publishers, a Subscriber acts on elements as it receive
 
 Source: https://developer.apple.com/documentation/combine
 ****
-#### Explain the difference between Serial vs Concurrent
+### Explain the difference between Serial vs Concurrent
 
 Tasks executed *serially* are executed one at a time while tasks that are executed *concurrently* may be executed at the same time.
 ****
-#### Spot the bug that occurs in the code:
+### Spot the bug that occurs in the code:
 
 <details open>
 <summary>Swift</summary>
@@ -852,29 +857,29 @@ dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
 
 ## Unit Testing / UI Testing
 
-#### What is the purpose of unit/UI testing? What are the benefits?
+### What is the purpose of unit/UI testing? What are the benefits?
 
 Unit/UI testing are the basic of test-driven development. This development approach allows you to codify requirements for your code before you implement it. Unit tests are important to make sure that code meets its design and requirements and behaves as expected. Parts of the program are segregated and tested to ensure that individual parts are working correctly.
 ****
 ## View / Storyboard
 
-#### What is the difference between viewDidLoad and viewDidAppear? Which should you use to load data from a remote server to display in the view?
+### What is the difference between viewDidLoad and viewDidAppear? Which should you use to load data from a remote server to display in the view?
 
 viewDidLoad is only called when the view is loaded (after loadView is called). viewDidAppear, on the other hand, is called everytime the view appears on the device.
 
 If the data is static for the most part, it can be loaded in viewDidLoad and cached. But if the data is dynamic and likely to change often, it is preferrable to use viewDidAppear. In both instances, data should be loaded asynchronously on a background thread to avoid blocking the UI.
 ****
-#### What is the difference between frame and bound of a UIView?
+### What is the difference between frame and bound of a UIView?
 
 The *frame* of a UIView is the region relative to the superview it is contained within while the *bounds* of a UIView is the region relative to its own coordinate system.
 
 Exapanding on these properties further: `frame` refers to a view's location and size using the parent view's coordinate system and it's thus important for placing the view in the parent. Whereas `bounds` means a view's location and size using its own coordinate system, and is important for placing the view's content or subviews within itself.
 ****
-#### What is the reuseIdentifier for?
+### What is the reuseIdentifier for?
 
 The *reuseIdentifier* indicates that cells for a UITableView (or UICollectionView) can be reused. UITableView maintains an internal cache of UITableViewCell with the appropriate identifier and allows them to be reused when dequeueForCellWithReuseIdentifier is called. As a result, this increases performance of UITableView since a new view does not have to be created for a cell.
 ****
-#### What is Auto Layout?
+### What is Auto Layout?
 
 Auto Layout is used to dynamically calculate the size and position of views based on constraints.
 
@@ -886,7 +891,7 @@ Traditionally, apps laid out their user interface by programmatically setting th
 
 Source: https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html
 
-
+****
 # Algorithm Resources
 
 #### [EKAlgorithm](https://github.com/EvgenyKarkan/EKAlgorithms): Algorithm and data structures in Objc
