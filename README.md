@@ -592,7 +592,7 @@ Private access restricts the use of an entity **to the enclosing declaration**, 
 
 *var* is a variable that can be changed while *let* denotes a constant that cannot be changed once set.
 ****
-### What is the difference between a struct and a class?
+### **What is the difference between a struct and a class?**
 
 The main difference to note is that structs are value types (stored on stack) while classes are reference types (stored on heap).
 
@@ -628,7 +628,7 @@ println("\(x.data), \(y.data)")	// prints "42, 42"
 
 **Source:** https://developer.apple.com/swift/blog/?id=10
 ****
-###**Why Choose a Struct over a Class in Swift?**
+### **Why Choose a Struct over a Class in Swift?**
 
 """
 Structs are preferable if they are relatively small and copiable because copying is a lot safer than having multiple references to the same instance as happens with classes. This is especially important when passing around a variable to many classes and/or in a multithreaded environment. If you can always send a copy of your variable to other places, you never have to worry about that other place changing the value of your variable underneath you.
@@ -644,6 +644,7 @@ Using Structs instead of classes for the same things (where that makes sense) wi
 
 (Source: https://stackoverflow.com/questions/24232799/why-choose-struct-over-class)
 
+****
 **Pointers**
 
 A Swift constant or variable that refers to an instance of some reference type is similar to a pointer in C, but isn’t a direct pointer to an address in memory, and doesn’t require you to write an asterisk (*) to indicate that you are creating a reference. Instead, these references are defined like any other constant or variable in Swift. You can interact with pointers directly via the Swift Standard Library, however, this isn't something we typically do except for in very specific cases, and mostly we should not need to do this.
