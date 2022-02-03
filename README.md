@@ -391,34 +391,7 @@ A Graph is an important data structure in computer science; it is defined as a c
 ****
 ## Memory Management
 
-### Why do you generally create a weak reference when using self in a block?
-
-Sometimes it is necessary it capture self in a block such as when defining a callback block. However, since blocks maintain strong references to any captured objects including self, this may lead to a strong reference cycle and memory leak.
-
-Instead, capturing a weak reference to self is recommended in order to avoid this issue:
-
-
-<summary>Objective-C</summary>
-
-```objective-c
-SomeBlock* __weak weakSelf = self;
-```
-
-<summary>Swift</summary>
-In Swift, to deal with what ARC (automatic reference counting) has given us, we can similarly use code like this with our "closures":
-```swift
-// To avoid retain cycles in closures we can make use of the "Capture List"
-// as in the below example. 
-resource.request().onComplete { [weak self] response in
-    guard let strongSelf = self else { return } // or guard let `self` = self else { return }
-    let modal = strongSelf.updateModel(response)
-    strongSelf.updateUI(model)
- }
-```
-    
-
-****
-### What is Memory Management handled on iOS?
+### How is Memory Management handled on iOS?
 
 iOS uses something called **ARC** which stands for **Automatic Reference Counting**. When an object is said to have a strong reference to it, ARC increase its retain count by 1. When the retain count of an object reaches 0, the object will typically be deallocated if there are no more strong references to it. Unlike garbage collection, ARC does not handle reference cycles automatically. Before ARC we had to deallocate manually, however the work of Chris Latner and other brough the automatic method to both Objective-C and Swift.
 
@@ -427,11 +400,13 @@ iOS uses something called **ARC** which stands for **Automatic Reference Countin
 The use of a retain count has been around since the early day of iOS: The way this originally worked was that when you explicitly allocated an object it got a retain count of 1 and then when you called release or autorelease on that same object, its retain count was then decremented and the object was then collected. Furthermore, if you allocated further instances of the object then the retain count would increase further.
 
 For example:
+```objective-c
 
 NSObject *someObject = [[NSObject aloc] init]; //retain count becomes 1
 [someObject release]; //retain count reduces back to zero 0
 
-(Source: P)
+// (Source: P)
+```
 
 What happened with the above code is that when an object got released its -dealloc method got called on an object and its memory will then be reclaimed.
 
@@ -507,6 +482,31 @@ resource.request().onComplete { [weak self] response in
 }
 ```
 Should a memory leak occur, there are a range of tools we can use in order to diagnose the cause and identify the source. Some of these tools are found in "Instruments".
+
+### Why do you generally create a weak reference when using self in a block?
+
+Sometimes it is necessary it capture self in a block such as when defining a callback block. However, since blocks maintain strong references to any captured objects including self, this may lead to a strong reference cycle and memory leak.
+
+Instead, capturing a weak reference to self is recommended in order to avoid this issue:
+
+
+***Objective-C***
+
+```objective-c
+SomeBlock* __weak weakSelf = self;
+```
+
+***Swift***
+In Swift, to deal with what ARC (automatic reference counting) has given us, we can similarly use code like this with our "closures":
+```swift
+// To avoid retain cycles in closures we can make use of the "Capture List"
+// as in the below example. 
+resource.request().onComplete { [weak self] response in
+    guard let strongSelf = self else { return } // or guard let `self` = self else { return }
+    let modal = strongSelf.updateModel(response)
+    strongSelf.updateUI(model)
+ }
+```
 
 ****
 ### What is the difference between *copy* and *retain*?
