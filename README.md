@@ -421,6 +421,34 @@ resource.request().onComplete { [weak self] response in
 ### What is Memory Management handled on iOS?
 
 iOS uses something called **ARC** which stands for **Automatic Reference Counting**. When an object is said to have a strong reference to it, ARC increase its retain count by 1. When the retain count of an object reaches 0, the object will typically be deallocated if there are no more strong references to it. Unlike garbage collection, ARC does not handle reference cycles automatically. Before ARC we had to deallocate manually, however the work of Chris Latner and other brough the automatic method to both Objective-C and Swift.
+
+***Reference Counting***
+
+The use of a retain count has been around since the early day of iOS: The way this originally worked was that when you explicitly allocated an object it got a retain count of 1 and then when you called release or autorelease on that same object, its retain count was then decremented and the object was then collected. Furthermore, if you allocated further instances of the object then the retain count would increase further.
+
+For example:
+
+NSObject *someObject = [[NSObject aloc] init]; //retain count becomes 1
+[someObject release]; //retain count reduces back to zero 0
+
+(Source: P)
+
+What happened with the above code is that when an object got released its -dealloc method got called on an object and its memory will then be reclaimed.
+
+One of the pre-ARC tools that developers could use was called an `AutoreleasePool` which was a section of your app code where you can collect objects sent an autorelease message, you would then be able to clean them up via the sending of an NSAutoreleasePool  drain message (Source: P). At this point in time, one of the only alternatives to manual memory management in Objective-C was libauto which was “a scanning, conservative, generational, multi-threaded garbage collector”. The algorithm used involved scanning the memory in use by an app and collecting out of scope memory.
+
+***Automatic Reference Counting (ARC)***
+
+Automatic Reference Counting (ARC) is a memory management feature of the compiler used by Xcode; the built-in Xcode compiler is called Clang Compiler was developed within Apple by Chris Lattner and others. The origins of ARC were in work carried out by Chris and his colleagues on the Clang compiler, starting with the addition of C++ support, and also tied in with the early stages of development of Swift programming language. They felt during this that the memory management solutions (such as manual memory management and the libauto garbage collector mentioned above) were not the right automatic memory management for the compiler and they were not cutting the mustard and that ARC could be the new solution for this. Whilst ARC can technically be thought of as an alternative type of “garbage collection”, that term typical does not refer to referencing counting based algorithms, meaning that ARC is NOT considered “garbage collection” in the general use of the term.
+
+Automatic Reference Counting works for both the Objective-C and Swift programming languages, and it involves the compiler inserting the “object code messages” which previously the programmer had to type in manually: that is the retain and release keywords. These keywords work to increase and decrease the reference count for a particular object at run time. What this means is that when the reference count of an object does get to zero, the object is deallocated and kicked out of memory (Ref#: C) conversely ARC won’t deallocate an instance when there is still at least one active reference to it (Ref#: D).
+
+***Limitations of ARC***
+
+ARC implements automatic memory management for objects and blocks, this means that we no longer have to explicitly insert retains and releases as was previously the case. However, ARC is not a tracing type garbage collection algorithm, and “it does not provide a cycle collector”, instead we must explicitly manage the lifetime of objects. In certain scenarios ARC is not able to work out when it’s safe to deallocate a particular class instance and therefore, to avoid a retention cycle being created we need to help the compiler to work out what object we need for our program and which ones are safe to be let go.
+
+One thing that ARC didn’t really handle when it was introduced was CF objects from the CoreFoundation framework, so for example when I was updating a very legacy Objective-C app I would often see leaks involving these objects. This was because, with Core Foundation, any objects which you allocate needed to be released with either CFRelease or CFMakeCollectable, and they were not picked up by ARC. The reason for this is that the Core Foundation library is written in pure low-level C code, and it’s a problem to try and make the use of the reference count automatic when using these CF types.
+
 ****
 ### What is the difference between *weak* and *strong*?
 
@@ -432,6 +460,11 @@ First, objects are *strong* by default.
 Common instances of *weak* references are delegate properties and subview/controls of a view controller's main view since those views are already strongly held by the main view. ([source](http://stackoverflow.com/questions/11013587/differences-between-strong-and-weak-in-objective-c))
 
 "Important places to use weak variables are in cases where you have potential retain cycles. A retain cycle is what happens when two objects both have strong references to each other. If 2 objects have strong references to each other, ARC will not generate the appropriate release message code on each instance since they are keeping each other alive". 
+
+A class with a strong reference is managed using “normal” Automatic Reference Counting meaning that as long as there are any references anywhere to it – then it will stay in memory.
+
+In contrast, a weak reference means: if no other class is referencing this object, then I don’t care about the object either so this reference can be made Nil. In order for the weak modifier to work it needs to be nill-able, so that means that it can only be used with optional pointers to reference types. Weak pointers will never cause an object to be retained or kept in the heap (Ref#: T). One example of this is the outlets we can use with storyboards or nibs: since these are strongly held by the view hierarchy, we’re free to designate them as weak (i.e. `@IBOutlet weak var carScreenView: CatScreenView!`).
+
 ****
 **Weak vs Unowned**
 
@@ -448,6 +481,33 @@ A memory leak commonly occurs when an object is allocated in such a way that ***
 ### What is a Retain Cycle?
 
 Retain cycles can occur when memory management is based on retain count. This typically occurs when **two objects strongly reference each other**. As a result, the retain count of either object will never reach zero and deallocated from memory (hence retaining each other).
+
+Retain / Retention Cycles
+
+What we call a reference cycle can happen if two class instances hold strong references to each other, leading to circular reference situations, where each instance is keeping the other one alive.  This scenario, in turn, can often lead to memory leaks, or they can be cascading leaks where the memory usage starts to increase exponentially whilst the app is running. We need to be breaking cycles in the code manually by using the weak or unowned modifiers.
+
+***Reference Cycles due to the Delegate Pattern***
+TODO: Add details
+
+***Reference Cycles due to Closures***
+
+Weak with Closures and Blocks
+
+We typically need to use a weak modifier when we working with closures and blocks (particularly those with references to `self`). See more about this in my articles on Closures in Swift and Blocks in Objective-C.
+
+One common mechanism which can lead to issues like reference cycles is capturing strong references inside closures. Since closures in Swift are reference types, they are capable of capturing values by reference from their enclosing scope (and indeed in Swift, this is the default whereas in Objective-C we would need to mark a particular property with the __blockmodifier to use it in this way).
+
+To solve this problem in our closures and to weakify references in Swift, we can use something called a “capture list” which appears inside the start of a particular closure and looks like square brackets followed byin, together with the weak or unowned storage modifier:
+
+```swift
+resource.request().onComplete { [weak self] response in
+    guard let strongSelf = self else { return }
+    let model = strongSelf.updateModel(response)
+    strongSelf.updateUI(model)
+}
+```
+Should a memory leak occur, there are a range of tools we can use in order to diagnose the cause and identify the source. Some of these tools are found in "Instruments".
+
 ****
 ### What is the difference between *copy* and *retain*?
 
@@ -458,12 +518,25 @@ When you *retain* an object, you share the same version with whoever passed the 
 ****
 ### **What is the Difference between the Stack vs the Heap?**
 
-"""
-The stack is the memory set aside as scratch space for a thread of execution. When a function is called, a block is reserved on the top of the stack for local variables and some bookkeeping data. When that function returns, the block becomes unused and can be used the next time a function is called. The stack is always reserved in a **LIFO (last in first out) order**; the most recently reserved block is always the next block to be freed. This makes it really simple to keep track of the stack; freeing a block from the stack is nothing more than adjusting one pointer.
 
-The heap is memory set aside for dynamic allocation. Unlike the stack, there's no enforced pattern to the allocation and deallocation of blocks from the heap; you can allocate a block at any time and free it at any time. This makes it much more complex to keep track of which parts of the heap are allocated or free at any given time; there are many custom heap allocators available to tune heap performance for different usage patterns.
+***Stack vs Heap***
 
-Each thread gets a stack, while there's typically only one heap for the application (although it isn't uncommon to have multiple heaps for different types of allocation).
+It’s firstly important to know that value types (like structs) will be stored on “the stack”, whereas reference types (basically meaning classes) are dynamically managed on “the heap”.
+
+N.B. The terms “the stack” and “the heap” can have different meanings in different languages or programming environments, as they can be implemented in a variety of ways but there are usually similarities in how these data structures are utilized managing memory.
+
+Both “the stack” and “the heap” are stored in RAM.
+
+***The Stack (call stack)***
+
+Typically a call stack is composed of “stack frames“ which are data structures that contain information about functions to call, these stack frames typically represent a function call and its argument data. The call stack “stores information relevant to the current function such as a pointer to whichever function it was called from, and any local variables. Because functions call other functions and then return, the stack grows and shrinks to hold information from the functions further down the call stack. A program doesn’t really have runtime control over it; it’s determined by the programming language, OS and even the system architecture” (Ref#S).
+
+***The Heap***
+
+Contrastingly, “the heap is a general term used for any memory that is allocated dynamically and randomly; i.e. out of order. The memory is typically allocated by the OS, with the application calling API functions to do this allocation. There is a fair bit of overhead required in managing dynamically allocated memory, which is usually handled by the OS” (Ref#: S).
+
+In the usual operation of the ARC system, “objects are allocated on the heap, and their lifetime is manually managed using a reference count. This is done using two instance methods which all classes are expected to implement: retain increases the object’s reference count by 1, whereas conversely release decreases the object’s reference count by 1 and calls the instance method dealloc if the count reaches 0″. Therefore, to simplify, ARC keeps track of all the vars and lets that point to some class in the heap and tosses out classes form the heap when they are no longer referenced.
+
 
 **To what extent are they controlled by the OS or language runtime?**
 
