@@ -481,7 +481,9 @@ resource.request().onComplete { [weak self] response in
     strongSelf.updateUI(model)
 }
 ```
-Should a memory leak occur, there are a range of tools we can use in order to diagnose the cause and identify the source. Some of these tools are found in "Instruments".
+Should a memory leak occur, there are a range of tools we can use in order to diagnose the cause and identify the source. Some of these tools are found in "Instruments", or there is also a other set of useful tools inside Xcode itself such as the "Memory Graph" which one can access in XCode when one has pre-configured the scheme one uses to run the app.
+
+TODO: Lots more detail on this here.
 
 ### Why do you generally create a weak reference when using self in a block?
 
