@@ -100,6 +100,10 @@ Core Data is not typesafe, whilst one may use different queues with Core Data, "
 
 However, there are a range of solutions and methods including cocoapods which look to deal with the posibility of issues caused by the above.
 ****
+
+Sources
+X: https://www.youtube.com/watch?v=O7u9nYWjvKk
+
 ### Using Core Data with SwiftUI
 
 *Here we can only breifly touch on this, see the links for full understanding.*
@@ -1021,3 +1025,13 @@ If you open an issue, I would be happy to go ahead and add the question with the
 - onthecodePath
 - Sergtsaeb
 - StephenClarkApps
+
+#### References / Sources
+
+Topic: Memory Mangement
+A: https://www.steveclarkapps.com/resolving-memory-leaks-in-xcode/
+
+Topic: Swift UI
+A:
+B:
+C: https://www.youtube.com/watch?v=-yjKAb0Pj60
