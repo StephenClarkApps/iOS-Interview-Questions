@@ -182,7 +182,9 @@ A common occurence in MVC is where you have a massive-view-controller (some joke
 ### The Coordinator Pattern
 The Coordinator Pattern is a Structural / Architectural Design Pattern that defines how we deal with screen flow, and navigation in our apps.
 
-The Coordinator pattern attempts to address issues with the MVC and MVVM patterns, which, in iOS, can cause our View Controllers to be dependent on each other and prevent effective View Controller re-use.
+The coordinator pattern removes the job of app navigation from view controllers making them more manageable andreusable whilst also letting us adjust our app’s flow whenever we want or need to. Furthermore, we can also ***inject our dependencies*** via our coordinators.
+
+In this way the Coordinator pattern attempts to address issues with the MVC and MVVM patterns, which, in iOS, can cause our View Controllers to be dependent on each other and can prevent effective View Controller re-use.
 
 #### Back Story of the Pattern
 The Coordinator pattern is a design pattern originally proposed by **Soroush Khanlou** in published articles and at a presentation at an iOS development back around 2014.
@@ -190,6 +192,26 @@ The Coordinator pattern is a design pattern originally proposed by **Soroush Kha
 #### Implementing the Pattern
 
 Implemting the Coordinator Pattern in iOS (either in Swift or Objectieve-C) starts with defining a simple protocol.
+
+This typically could look something like this:
+
+```swift
+// Fistly, before we create any Coordinators, we define a Coordinator protocol which our Coordinators
+// will conform to typically includes as a minimum a `start()` method as well as an array of child coordinators
+// where the coordinator usually has to implement the `start()` method and may or may not have
+// child coordinators
+
+import UIKit
+
+protocol Coordinator {
+    var childCoordinators: [Coordinator] { get set }
+    var navigationController: UINavigationController { get set }
+
+    func start()
+}
+
+
+```
 
 ### What is MVVM-C ?
 
