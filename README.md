@@ -10,14 +10,14 @@ Use the Table of Contents to practice and test your knowledge. It doesn't show t
 
 ## Table of Contents
 
-- [Database](https://github.com/StephenClarkApps/iOS-Interview-Questions#database)
+- [Core Data](https://github.com/StephenClarkApps/iOS-Interview-Questions#database)
     - What is Core Data?
     - When would you use Core Data over NSUserDefault?
     - What is a managed object context?
     - What is NSFetchRequest?
 - [Debugging](https://github.com/StephenClarkApps/iOS-Interview-Questions#debugging)
     - What are some ways of debugging in iOS?
-- [Design Pattern](https://github.com/StephenClarkApps/iOS-Interview-Questions#design-patterns)
+- [Design Patterns](https://github.com/StephenClarkApps/iOS-Interview-Questions#design-patterns)
     - What is Singleton Pattern?
     - What is the delegation pattern?
     - What is MVC?
