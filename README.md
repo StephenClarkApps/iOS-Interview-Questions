@@ -185,7 +185,7 @@ The Coordinator Pattern is a Structural / Architectural Design Pattern that defi
 The Coordinator pattern attempts to address issues with the MVC and MVVM patterns, which, in iOS, can cause our View Controllers to be dependent on each other and prevent effective View Controller re-use.
 
 #### Back Story of the Pattern
-The Coordinator pattern is a design pattern originally proposed by Soroush Khanlou in published articles and at a presentation at an iOS development back around 2014.
+The Coordinator pattern is a design pattern originally proposed by **Soroush Khanlou** in published articles and at a presentation at an iOS development back around 2014.
 
 #### Implementing the Pattern
 
@@ -194,6 +194,8 @@ Implemting the Coordinator Pattern in iOS (either in Swift or Objectieve-C) star
 ### What is MVVM-C ?
 
 This is an approach combining MVVM with the Coordinator Pattern, and it may or may not make use of an Rx or Reactive binding between your View Models and your Views..
+
+TODO: Provide a simple example and elaborate on Coordinators
 
 ****
 ### What are the SOLID design principles?
@@ -308,6 +310,34 @@ Protocol Oriented Programming is a version of Object Oriented Programming (OOP) 
 <summary>Common Use Contexts</summary>
 A common instance protocols are used is providing a DataSource for UITableView or UICollectionView ([source](https://www.codementor.io/mattgoldspink/ios-interview-tips-questions-answers-objective-c-du1088nfb))
 </summary>
+
+
+ELABORATION (level 2 detail)
+
+Use of Value vs Reference Types
+
+Swift classes have reference semantics (passed by reference), but Swift also supports enums and structs that are passed by value, and these enums and structs are also able to support many of the features provided by classes. By using POP, we are steering away from class inheritance and instead favoring the use of value types because:
+
+- When we subclass from some superclass we have to inherit all its properties and methods, some of which we may not need or want. This can mean our object getting bloated with a lot of unnecessary code.
+- With a deeply nested structure of inheritance, it can be really hard to know where a problem is coming from as we need to jump up and down the hierarchy in order to find and fix bugs.
+- Because inheritance uses classes which are reference types we can get unforeseen consequences from modifying a property in an instance of a class, such that we may end up with spaghetti code scenarios.
+- A goal of ours should be to separate the public interface from the private implementation where we can (see SOLID principles).
+- We want our software to be defined in components that talk to each other using interfaces.
+- We want reusability, extensibility, black-boxed functionality, in order to make our code a hell of a lot more maintainable going forward.
+- We want to make our code more testable with unit tests, and we want to be able to inject our dependencies using dependency injection, which is all facilitated by a more modular approach.
+
+(https://www.steveclarkapps.com/what-are-protocols-how-do-we-use-them/)
+
+The benefits of Composition over Inheritance include: “It is more natural to build business-domain classes out of various components than trying to find commonality between them and creating a family tree”.
+
+Composition is also less prone to the quirks of the family members because it’s better to compose what an object can do than extend what it is. The reason this is better is that it more easily accommodates future requirements changes that would otherwise require a complete restructuring of business-domain classes in the inheritance model. It means that making small changes in a part of an inheritance model need not potentially cause a raft of unforeseen consequences down the chain of inheritance (Ref#: P).
+
+```swift
+// Composition
+struct SomeStruct: ProtocolAlpha, ProtocolBeta, ProtocolCharlie { 
+    // Implementation (conforming to the requirements of each protocol)
+}
+```
 
 ***
 #### TOPIC AREA: Development Lifecycle
@@ -452,6 +482,10 @@ In contrast, a weak reference means: if no other class is referencing this objec
 
 ([source](https://krakendev.io/blog/weak-and-unowned-references-in-swift))
 
+"Unlike a weak reference, an unowned reference is expected to always have a value. As a result, marking a value as unowned doesn’t make it optional, and ARC never sets an unowned reference’s value to nil."
+
+([source](https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html))
+
 ****
 ### What is a Memory Leak?
 
@@ -527,11 +561,12 @@ When you *retain* an object, you share the same version with whoever passed the 
 
 ***Stack vs Heap***
 
-It’s firstly important to know that value types (like structs) will be stored on “the stack”, whereas reference types (basically meaning classes) are dynamically managed on “the heap”.
+It’s firstly important to know that **value types (like structs) will be stored on “the stack”**, whereas **reference types (which are mostly classes) are dynamically managed on “the heap”**.
 
 N.B. The terms “the stack” and “the heap” can have different meanings in different languages or programming environments, as they can be implemented in a variety of ways but there are usually similarities in how these data structures are utilized managing memory.
 
 Both “the stack” and “the heap” are stored in RAM.
+
 
 ***The Stack (call stack)***
 
