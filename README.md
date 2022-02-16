@@ -326,17 +326,18 @@ Swift protocols are different from Objective-C protocols in that Swift Protocols
 - They can be conformed to by Structs and Enums (value types) as well as Classes (reference types).
 ****
 ### **What is Protocol Oriented Programming?**
-
+<br />
 Protocol Oriented Programming is a version of Object Oriented Programming (OOP) which emphasizes composition over inheritance as a method of functionality-sharing.
 
-<summary>Common Use Contexts</summary>
-A common instance protocols are used is providing a DataSource for UITableView or UICollectionView ([source](https://www.codementor.io/mattgoldspink/ios-interview-tips-questions-answers-objective-c-du1088nfb))
-</summary>
+Common Use Contexts
+A common instance protocols are used is providing a DataSource for UITableView or UICollectionView 
+([source](https://www.codementor.io/mattgoldspink/ios-interview-tips-questions-answers-objective-c-du1088nfb)).
 
+<br />
 
-ELABORATION (level 2 detail)
+***ELABORATION (level 2 detail)***
 
-Use of Value vs Reference Types
+**Use of Value vs Reference Types**
 
 Swift classes have reference semantics (passed by reference), but Swift also supports enums and structs that are passed by value, and these enums and structs are also able to support many of the features provided by classes. By using POP, we are steering away from class inheritance and instead favoring the use of value types because:
 
@@ -360,16 +361,19 @@ struct SomeStruct: ProtocolAlpha, ProtocolBeta, ProtocolCharlie {
     // Implementation (conforming to the requirements of each protocol)
 }
 ```
+<br />
 
-***
+****
 #### TOPIC AREA: Development Lifecycle
 ### What is the Waterfall methodology and what is an Agile methodology? What are the differences between them?
-
+<br />
 Waterfall methodology is a sequential model for software development. It is separated into a sequence of pre-defined phases including feasibility, planning, design, build, test, production, and support.
 
 On the other hand, Agile development methodology is a linear sequential apporach that provides flexibility for changing project requirements.
 
+<br />
 List of differences:
+
 - Waterfall model divides software development process into different phases while Agile segregates the project development lifecycle into sprints. This makes waterfall more rigid while agile allows for more flexibility
 - Waterfall model describes the software development life cycle as a single project while Agile considers it as a collection of many different projects; are iterations of different phases focusing on improving overall software quality with feedback from users and QA team.
 - Since waterfall is more rigid, development requirements need to be clearly established beforehand since there is little flexibility for changing once project development starts. Meanwhile, Agile allow changes to be made anytime along the project development process even after initial planning has been completed.
@@ -380,10 +384,12 @@ List of differences:
 ****
 ### **What is the difference between a class and an object?**
 
+<br />
+
 In the simplest sense, a class is a blueprint for an object. It describes the properties and behaviors common to any particular type of object. An object, on the other hand, is an instance of a class.
 ****
 ### **What is JSON? What are the pros and cons?**
-
+<br />
 JSON stands for JavaScript Object Notation and is a common format for communicating data between different systems (principally on the internet).
 
 It uses a limited number of data types in order to keep things fairly simple; these data types include string, bool, arrays, object/dictionary, number, and null. JSON is derived from JavaScript, the JSON format having been originally specified as a separate standard in the 2000s but with competing versions of the standard. However, I-JSON (short for “Internet JSON”), proposed in 2015, “is a restricted profile of JSON designed to maximize interoperability and increase confidence that software can process it successfully with predictable results” (RFC 7493).
@@ -391,7 +397,7 @@ It uses a limited number of data types in order to keep things fairly simple; th
 These days JSON has become a language-independent format with many programming languages and their associated libraries supporting conversions to and from this format from there own data-types.
 
 ### **Decoding JSON**
-
+<br />
 On the side of the Swift code in our apps, we need to implement some method of converting between the JSON data, and our locally defined objects. In the past, we might have relied on the JSONSerialization class to do this, but these days, in the Swift language, we typically will take advantage of Codable types for our data layer, and we use these with JSONEncoder and JSONDecoder classes.
 
 ### The Pros and Cons of Json
@@ -408,7 +414,7 @@ On the side of the Swift code in our apps, we need to implement some method of c
 - Can't use comments
 ****
 ### What is the difference between not-running, inactive, active, background and suspended execution states?
-
+<br />
 - **Not-running state** occurs when the app either has not be launched or was running but was terminated by the system.
 - **Inactive state** occurs where the app runs in the foreground but is currently not receiving events. (It may be executing other code though). This state is typically brief as apps transitions to other states.
 - **Active state** is where the app is running in the foreground and receiving events. This is the normal mode for foreground apps.
@@ -1075,7 +1081,9 @@ Great! Creating an issue will let me know what changes should be made. You can e
 
 If you open an issue, I would be happy to go ahead and add the question with the appropriate answer when I get to it!
 ****
-# Thank You
+<br />
+
+## Thank You
 
 #### Contributors
 
@@ -1083,12 +1091,18 @@ If you open an issue, I would be happy to go ahead and add the question with the
 - Sergtsaeb
 - StephenClarkApps
 
+<br />
+
 #### References / Sources
 
 Topic: Memory Mangement
+
 A: https://www.steveclarkapps.com/resolving-memory-leaks-in-xcode/
 
+<br />
+
 Topic: Swift UI
+
 A:
 B:
 C: https://www.youtube.com/watch?v=-yjKAb0Pj60
