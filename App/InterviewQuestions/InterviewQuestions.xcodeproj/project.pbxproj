@@ -11,6 +11,7 @@
 		8640897727BD06A40049ABE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8640897627BD06A40049ABE4 /* ContentView.swift */; };
 		8640897927BD06A60049ABE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8640897827BD06A60049ABE4 /* Assets.xcassets */; };
 		8640897C27BD06A60049ABE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8640897B27BD06A60049ABE4 /* Preview Assets.xcassets */; };
+		8640898327BD120C0049ABE4 /* QuestionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8640898227BD120C0049ABE4 /* QuestionButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		8640897627BD06A40049ABE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8640897827BD06A60049ABE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8640897B27BD06A60049ABE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8640898227BD120C0049ABE4 /* QuestionButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		8640897327BD06A40049ABE4 /* InterviewQuestions */ = {
 			isa = PBXGroup;
 			children = (
+				8640898227BD120C0049ABE4 /* QuestionButtonStyle.swift */,
 				8640897427BD06A40049ABE4 /* InterviewQuestionsApp.swift */,
 				8640897627BD06A40049ABE4 /* ContentView.swift */,
 				8640897827BD06A60049ABE4 /* Assets.xcassets */,
@@ -139,6 +142,7 @@
 			files = (
 				8640897727BD06A40049ABE4 /* ContentView.swift in Sources */,
 				8640897527BD06A40049ABE4 /* InterviewQuestionsApp.swift in Sources */,
+				8640898327BD120C0049ABE4 /* QuestionButtonStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
