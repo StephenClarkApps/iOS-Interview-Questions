@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+/*
+ What we need is a data structure that reflects topic and contents of that topic.
+ 
+ When it comes to links to that topic more that one button might link to the content.
+ 
+ The reference will be passed to some Coordinator to present
+ the relevant content to the user by injecting it into a detail view.
+ 
+ */
+
 struct ContentView: View {
     var body: some View {
         ZStack {
